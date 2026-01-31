@@ -1,5 +1,4 @@
 import { wayfinder } from '@laravel/vite-plugin-wayfinder';
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
@@ -7,8 +6,8 @@ import { defineConfig } from 'vite';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.tsx'],
-            ssr: 'resources/js/ssr.tsx',
+            input: ['resources/public/css/app.scss', 'resources/public/js/app.tsx','resources/private/css/app.scss', 'resources/private/js/app.tsx'],
+            ssr: 'resources/public/js/ssr.tsx',
             refresh: true,
         }),
         react({
@@ -16,10 +15,14 @@ export default defineConfig({
                 plugins: ['babel-plugin-react-compiler'],
             },
         }),
-        tailwindcss(),
         wayfinder({
             formVariants: true,
+            path:'resources/public/js'
         }),
+        // wayfinder({
+        //     formVariants: true,
+        //     path:'resources/private/js'
+        // }),
     ],
     esbuild: {
         jsx: 'automatic',

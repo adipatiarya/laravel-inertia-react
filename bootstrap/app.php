@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Middleware\HandleAppearance;
-use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\HandleInertiaRequestsPublic;
+use App\Http\Middleware\HandleInertiaRequestsPrivate;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,11 +18,20 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
-        $middleware->web(append: [
+        // Admin group
+        $middleware->group('private', [
             HandleAppearance::class,
-            HandleInertiaRequests::class,
+            HandleInertiaRequestsPrivate::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        // Public group
+        $middleware->group('public', [
+            HandleAppearance::class,
+            HandleInertiaRequestsPublic::class,
+            AddLinkHeadersForPreloadedAssets::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
