@@ -109,9 +109,10 @@
         "skipLibCheck": true /* Skip type checking all .d.ts files. */,
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./resources/js/*"]
+            "@/*": ["./resources/public/js/*"],
+            "@@/*": ["./resources/private/js/*"]
         },
         "jsx": "react-jsx"
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx"]
+    "include": ["resources/public/js/**/*.ts", "resources/public/js/**/*.d.ts", "resources/public/js/**/*.tsx","resources/private/js/**/*.ts", "resources/private/js/**/*.d.ts", "resources/private/js/**/*.tsx"]
 }
