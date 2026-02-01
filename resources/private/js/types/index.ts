@@ -1,2 +1,2 @@
-export type * from './theme';
+export type * from './ui'
 export type * from './navigation';

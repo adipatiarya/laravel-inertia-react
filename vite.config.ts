@@ -21,10 +21,10 @@ export default defineConfig({
             formVariants: true,
             path:'resources/public/js'
         }),
-        // wayfinder({
-        //     formVariants: true,
-        //     path:'resources/private/js'
-        // }),
+        wayfinder({
+            formVariants: true,
+            path:'resources/private/js'
+        }),
     ],
     esbuild: {
         jsx: 'automatic',

@@ -5,9 +5,10 @@ type Props = {
     variant?: 'header' | 'sidebar';
 };
 
-export  function AppShell({children}: Props) {
+export  function AppContent({children}: Props) {
   return (
     <div>
+         AppContent 
         {children}
     </div>
   )
