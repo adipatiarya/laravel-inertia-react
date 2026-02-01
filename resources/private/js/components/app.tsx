@@ -4,7 +4,7 @@ type Props = {
     children: ReactNode;
 };
 
-export default function AppRoot({children}: Props) {
+export default function App({children}: Props) {
     return (
         <div className="app">
             {children}

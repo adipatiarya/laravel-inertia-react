@@ -1,11 +1,11 @@
-import AppRoot from "@@/components/app-root";
+import App from "@@/components/app";
 import { AppLayoutProps } from "@@/types/ui";
 
 export default function AppSidebarLayout ({breadcrumbs = [], children}: AppLayoutProps) {
     return (
-        <AppRoot>
+        <App>
             {JSON.stringify(breadcrumbs)}
             {children}
-        </AppRoot>
+        </App>
     )
 }

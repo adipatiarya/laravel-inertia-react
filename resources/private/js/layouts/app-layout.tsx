@@ -13,7 +13,6 @@ export default function AppLayout({ children, breadcrumbs, ...props } : AppLayou
             <AppSidebarLayout {...props} >
                 {children}
             </AppSidebarLayout>
-
         </AppSettings.Provider>
     )
 }
