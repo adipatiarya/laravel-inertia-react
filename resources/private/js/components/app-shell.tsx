@@ -4,9 +4,9 @@ type Props = {
     children: ReactNode;
 };
 
-export default function App({children}: Props) {
+export  function AppShell({children}: Props) {
     return (
-        <div className="app">
+        <div id="app" className="app app-header-fixed app-sidebar-fixed">
             {children}
         </div>
     )
