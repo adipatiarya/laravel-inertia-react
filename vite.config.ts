@@ -4,11 +4,15 @@ import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 import path from 'path';
 
-
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/public/css/app.scss', 'resources/public/js/app.tsx','resources/private/css/app.scss', 'resources/private/js/app.tsx'],
+            input: [
+                'resources/public/css/app.scss',
+                'resources/public/js/app.tsx',
+                'resources/private/css/style.scss',
+                'resources/private/js/app.tsx',
+            ],
             ssr: 'resources/public/js/ssr.tsx',
             refresh: true,
         }),
@@ -19,11 +23,11 @@ export default defineConfig({
         }),
         wayfinder({
             formVariants: true,
-            path:'resources/public/js'
+            path: 'resources/public/js',
         }),
         wayfinder({
             formVariants: true,
-            path:'resources/private/js'
+            path: 'resources/private/js',
         }),
     ],
     esbuild: {
@@ -31,12 +35,8 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-
-        '@': path.resolve(__dirname, './resources/public/js'),
-        '@@': path.resolve(__dirname, './resources/private/js'),
-
+            '@': path.resolve(__dirname, './resources/public/js'),
+            '@@': path.resolve(__dirname, './resources/private/js'),
+        },
     },
-  },
-
-
 });

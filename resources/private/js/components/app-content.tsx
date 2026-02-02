@@ -1,15 +1,13 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 type Props = {
     children: ReactNode;
-    variant?: 'header' | 'sidebar';
 };
 
-export  function AppContent({children}: Props) {
-  return (
-    <div>
-         AppContent 
-        {children}
-    </div>
-  )
+export function AppContent({ children }: Props) {
+    return (
+        <div id="content" className="app-content">
+            {children}
+        </div>
+    );
 }
