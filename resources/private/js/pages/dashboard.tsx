@@ -4,8 +4,8 @@ export default function Dashboard() {
     return (
         <AppLayout title="Dashboard">
             <AppContent>
-                <div>
-                    <h1>Content </h1>
+                <div className="panel">
+                    <div className="panel-body" style={{ height: '10vh' }}></div>
                 </div>
             </AppContent>
             <div className="theme-panel">Panel</div>
