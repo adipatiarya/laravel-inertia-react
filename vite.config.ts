@@ -10,10 +10,10 @@ export default defineConfig({
             input: [
                 'resources/public/css/app.scss',
                 'resources/public/js/app.tsx',
-                'resources/private/css/style.scss',
+                'resources/private/css/styles.scss',
                 'resources/private/js/app.tsx',
             ],
-            ssr: 'resources/public/js/ssr.tsx',
+            ssr: ['resources/public/js/ssr.tsx', 'resources/private/js/ssr.tsx'],
             refresh: true,
         }),
         react({

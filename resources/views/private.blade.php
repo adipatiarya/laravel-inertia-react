@@ -10,6 +10,7 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"> -->
 
         @viteReactRefresh
         @vite(['resources/private/js/app.tsx', "resources/private/js/pages/{$page['component']}.tsx"])
