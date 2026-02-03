@@ -1,12 +1,11 @@
 import { useAppSettings } from '@@/config/app-settings';
-import React from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 export function AppSidebar() {
     const { toggleSidebarOpen } = useAppSettings();
 
     return (
-        <React.Fragment>
+        <>
             <div id="sidebar" className="app-sidebar" data-bs-theme="dark">
                 <PerfectScrollbar className="app-sidebar-content">
                     <div className="menu">
@@ -38,6 +37,6 @@ export function AppSidebar() {
             </div>
             <div className="app-sidebar-bg" data-bs-theme="dark"></div>
             <div className="app-sidebar-mobile-backdrop"></div>
-        </React.Fragment>
+        </>
     );
 }
