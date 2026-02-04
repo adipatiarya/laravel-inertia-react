@@ -45,7 +45,7 @@ function NavItem({ menu, ...props }: { menu: MenuItem }) {
 }
 
 export function AppSidebar() {
-    const { toggleSidebarOpen } = useAppSettings();
+    const { toggleSidebarOpen, toggleSidebarMobileOpen } = useAppSettings();
 
     useEffect(() => {
         initSidebar();
@@ -59,11 +59,32 @@ export function AppSidebar() {
                         {menus.map((menu, i) => (
                             <NavItem menu={menu} key={i}></NavItem>
                         ))}
+                        <div className="menu-item d-flex">
+                            <a
+                                href="#"
+                                className="app-sidebar-minify-btn d-flex align-items-center text-decoration-none ms-auto"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    toggleSidebarOpen();
+                                }}
+                            >
+                                <i className="fa fa-angle-double-left"></i>
+                            </a>
+                        </div>
                     </div>
                 </PerfectScrollbar>
             </div>
             <div className="app-sidebar-bg" data-bs-theme="dark"></div>
-            <div className="app-sidebar-mobile-backdrop"></div>
+            <div className="app-sidebar-mobile-backdrop">
+                <a
+                    href="#"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        toggleSidebarMobileOpen();
+                    }}
+                    className="stretched-link"
+                ></a>
+            </div>
         </>
     );
 }

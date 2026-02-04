@@ -7,11 +7,19 @@ type Props = {
     variant?: 'default';
 };
 export function AppShell({ children, variant = 'default' }: Props) {
-    const { sidebarOpen, hasScroll } = useAppSettings();
+    const { sidebarOpen, hasScroll, sidebarMobileOpen } = useAppSettings();
 
     if (variant == 'default') {
         return (
-            <div id="app" className={cn('app app-header-fixed app-sidebar-fixed', hasScroll && 'has-scroll', !sidebarOpen && 'app-sidebar-minified')}>
+            <div
+                id="app"
+                className={cn(
+                    'app app-header-fixed app-sidebar-fixed',
+                    hasScroll && 'has-scroll',
+                    !sidebarOpen && 'app-sidebar-minified',
+                    sidebarMobileOpen && 'app-sidebar-mobile-toggled',
+                )}
+            >
                 {children}
             </div>
         );
