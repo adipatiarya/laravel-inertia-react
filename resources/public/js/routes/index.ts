@@ -292,76 +292,76 @@ homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 home.form = homeForm
 
 /**
-* @see \App\Http\Controllers\Private\HomeController::__invoke
-* @see app/Http/Controllers/Private/HomeController.php:0
-* @route '/admin'
+* @see \App\Http\Controllers\Private\AuthController::admin_login
+* @see app/Http/Controllers/Private/AuthController.php:10
+* @route '/admin/login'
 */
-export const admin = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: admin.url(options),
+export const admin_login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: admin_login.url(options),
     method: 'get',
 })
 
-admin.definition = {
+admin_login.definition = {
     methods: ["get","head"],
-    url: '/admin',
+    url: '/admin/login',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Private\HomeController::__invoke
-* @see app/Http/Controllers/Private/HomeController.php:0
-* @route '/admin'
+* @see \App\Http\Controllers\Private\AuthController::admin_login
+* @see app/Http/Controllers/Private/AuthController.php:10
+* @route '/admin/login'
 */
-admin.url = (options?: RouteQueryOptions) => {
-    return admin.definition.url + queryParams(options)
+admin_login.url = (options?: RouteQueryOptions) => {
+    return admin_login.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\Private\HomeController::__invoke
-* @see app/Http/Controllers/Private/HomeController.php:0
-* @route '/admin'
+* @see \App\Http\Controllers\Private\AuthController::admin_login
+* @see app/Http/Controllers/Private/AuthController.php:10
+* @route '/admin/login'
 */
-admin.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: admin.url(options),
+admin_login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: admin_login.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Private\HomeController::__invoke
-* @see app/Http/Controllers/Private/HomeController.php:0
-* @route '/admin'
+* @see \App\Http\Controllers\Private\AuthController::admin_login
+* @see app/Http/Controllers/Private/AuthController.php:10
+* @route '/admin/login'
 */
-admin.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: admin.url(options),
+admin_login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: admin_login.url(options),
     method: 'head',
 })
 
 /**
-* @see \App\Http\Controllers\Private\HomeController::__invoke
-* @see app/Http/Controllers/Private/HomeController.php:0
-* @route '/admin'
+* @see \App\Http\Controllers\Private\AuthController::admin_login
+* @see app/Http/Controllers/Private/AuthController.php:10
+* @route '/admin/login'
 */
-const adminForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: admin.url(options),
+const admin_loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: admin_login.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Private\HomeController::__invoke
-* @see app/Http/Controllers/Private/HomeController.php:0
-* @route '/admin'
+* @see \App\Http\Controllers\Private\AuthController::admin_login
+* @see app/Http/Controllers/Private/AuthController.php:10
+* @route '/admin/login'
 */
-adminForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: admin.url(options),
+admin_loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: admin_login.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Private\HomeController::__invoke
-* @see app/Http/Controllers/Private/HomeController.php:0
-* @route '/admin'
+* @see \App\Http\Controllers\Private\AuthController::admin_login
+* @see app/Http/Controllers/Private/AuthController.php:10
+* @route '/admin/login'
 */
-adminForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: admin.url({
+admin_loginForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: admin_login.url({
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -370,7 +370,7 @@ adminForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     method: 'get',
 })
 
-admin.form = adminForm
+admin_login.form = admin_loginForm
 
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard

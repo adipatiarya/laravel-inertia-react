@@ -5,7 +5,7 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 
-Route::middleware('public')->group(function () {
+Route::middleware(['web','public'])->group(function () {
 
     Route::get('/', function () {
         return Inertia::render('welcome', [ 'canRegister' => Features::enabled(Features::registration())]);
