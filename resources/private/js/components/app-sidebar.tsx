@@ -3,6 +3,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import menus, { MenuItem } from '@@/config/app-menu';
 import { useEffect } from 'react';
 import initSidebar from '@@/hooks/init-sidebar';
+import { cn } from '@@/lib/util';
 
 function NavItem({ menu, ...props }: { menu: MenuItem }) {
     let match = location.pathname.split('/').filter(Boolean).pop() == menu.path;
@@ -26,9 +27,8 @@ function NavItem({ menu, ...props }: { menu: MenuItem }) {
             {menu.title} {label} {highlight}
         </div>
     );
-
     return (
-        <div className={'menu-item' + (match ? ' active' : '') + (menu.children ? ' has-sub' : '')}>
+        <div className={cn('menu-item', match && 'active', menu.children && 'has-sub')}>
             <a className="menu-link" href={menu.path} {...props}>
                 {img} {icon} {title}
                 {caret} {badge}
