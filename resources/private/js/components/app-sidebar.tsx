@@ -1,37 +1,71 @@
 import { useAppSettings } from '@@/config/app-settings';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import menus, { MenuItem } from '@@/config/app-menu';
+import { useEffect } from 'react';
+import initSidebar from '@@/hooks/init-sidebar';
+
+function NavItem({ menu, ...props }: { menu: MenuItem }) {
+    let match = location.pathname.split('/').filter(Boolean).pop() == menu.path;
+
+    let icon = menu.icon && (
+        <div className="menu-icon">
+            <i className={menu.icon}></i>
+        </div>
+    );
+    let img = menu.img && (
+        <div className="menu-icon-img">
+            <img src={menu.img} alt="" />
+        </div>
+    );
+    let caret = menu.children && !menu.badge && <div className="menu-caret"></div>;
+    let label = menu.label && <span className="menu-label ms-5px">{menu.label}</span>;
+    let badge = menu.badge && <div className="menu-badge">{menu.badge}</div>;
+    let highlight = menu.highlight && <i className="fa fa-paper-plane text-theme"></i>;
+    let title = menu.title && (
+        <div className="menu-text">
+            {menu.title} {label} {highlight}
+        </div>
+    );
+
+    return (
+        <div className={'menu-item' + (match ? ' active' : '') + (menu.children ? ' has-sub' : '')}>
+            {menu.children ? (
+                <>
+                    <a className="menu-link" href="#">
+                        {img} {icon} {title}
+                        {caret} {badge}
+                    </a>
+                    <div className="menu-submenu">
+                        {menu.children.map((submenu, i) => (
+                            <NavItem key={i} menu={submenu} />
+                        ))}
+                    </div>
+                </>
+            ) : (
+                <a className="menu-link" href={menu.path} {...props}>
+                    {img} {icon} {title}
+                    {badge}
+                </a>
+            )}
+        </div>
+    );
+}
 
 export function AppSidebar() {
     const { toggleSidebarOpen } = useAppSettings();
+
+    useEffect(() => {
+        initSidebar();
+    }, []);
 
     return (
         <>
             <div id="sidebar" className="app-sidebar" data-bs-theme="dark">
                 <PerfectScrollbar className="app-sidebar-content">
                     <div className="menu">
-                        {[...Array(100).keys()].map((i) => (
-                            <div className="menu-item" key={i}>
-                                <a href="#" className="menu-link">
-                                    <div className="menu-icon">
-                                        <i className="fa fa-calendar"></i>
-                                    </div>
-                                    <div className="menu-text">Calendar</div>
-                                </a>
-                            </div>
+                        {menus.map((menu, i) => (
+                            <NavItem menu={menu} key={i}></NavItem>
                         ))}
-
-                        <div className="menu-item d-flex">
-                            <a
-                                href="#"
-                                className="app-sidebar-minify-btn d-flex align-items-center text-decoration-none ms-auto"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    toggleSidebarOpen();
-                                }}
-                            >
-                                <i className="fa fa-angle-double-left"></i> MANIFY
-                            </a>
-                        </div>
                     </div>
                 </PerfectScrollbar>
             </div>
