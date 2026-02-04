@@ -29,23 +29,16 @@ function NavItem({ menu, ...props }: { menu: MenuItem }) {
 
     return (
         <div className={'menu-item' + (match ? ' active' : '') + (menu.children ? ' has-sub' : '')}>
-            {menu.children ? (
-                <>
-                    <a className="menu-link" href="#">
-                        {img} {icon} {title}
-                        {caret} {badge}
-                    </a>
-                    <div className="menu-submenu">
-                        {menu.children.map((submenu, i) => (
-                            <NavItem key={i} menu={submenu} />
-                        ))}
-                    </div>
-                </>
-            ) : (
-                <a className="menu-link" href={menu.path} {...props}>
-                    {img} {icon} {title}
-                    {badge}
-                </a>
+            <a className="menu-link" href={menu.path} {...props}>
+                {img} {icon} {title}
+                {caret} {badge}
+            </a>
+            {menu.children && (
+                <div className="menu-submenu">
+                    {menu.children.map((submenu, i) => (
+                        <NavItem key={i} menu={submenu} />
+                    ))}
+                </div>
             )}
         </div>
     );
