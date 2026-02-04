@@ -120,20 +120,6 @@ var handleSidebarMenuToggle = function (menus: HTMLElement[], expandTime: number
         return true;
     });
 };
-const targetSidebar = document.querySelector<HTMLElement>('.app-sidebar:not(.app-sidebar-end)');
-const expandTime = targetSidebar?.getAttribute('data-disable-slide-animation') !== null ? 0 : 300;
-
-const menuBaseSelector = '.app-sidebar .menu > .menu-item.has-sub';
-const submenuBaseSelector = ' > .menu-submenu > .menu-item.has-sub';
-
-const menuLinkSelector = `${menuBaseSelector} > .menu-link`;
-const menus: HTMLElement[] = Array.from(document.querySelectorAll<HTMLElement>(menuLinkSelector));
-handleSidebarMenuToggle(menus, expandTime);
-
-// submenu lvl 1
-var submenuLvl1Selector = menuBaseSelector + submenuBaseSelector;
-var submenusLvl1 = [].slice.call(document.querySelectorAll(submenuLvl1Selector + ' > .menu-link'));
-handleSidebarMenuToggle(submenusLvl1, expandTime);
 
 export default function initSidebar() {
     const targetSidebar = document.querySelector<HTMLElement>('.app-sidebar:not(.app-sidebar-end)');
