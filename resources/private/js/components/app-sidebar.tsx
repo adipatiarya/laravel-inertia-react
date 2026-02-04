@@ -67,7 +67,7 @@ export function AppSidebar() {
                                 </div>
                                 <div className="menu-profile-info">
                                     <div className="d-flex align-items-center">
-                                        <div className="flex-grow-1">Sean Ngu</div>
+                                        <div className="d-flex">Sean Ngu</div>
                                     </div>
                                     <small>Frontend developer</small>
                                 </div>
