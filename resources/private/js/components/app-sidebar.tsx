@@ -27,6 +27,9 @@ function NavItem({ menu, ...props }: { menu: MenuItem }) {
             {menu.title} {label} {highlight}
         </div>
     );
+    if (menu.is_header) {
+        return <div className="menu-header">{menu.title}</div>;
+    }
     return (
         <div className={cn('menu-item', match && 'active', menu.children && 'has-sub')}>
             <a className="menu-link" href={menu.path} {...props}>
@@ -56,6 +59,21 @@ export function AppSidebar() {
             <div id="sidebar" className="app-sidebar" data-bs-theme="dark">
                 <PerfectScrollbar className="app-sidebar-content">
                     <div className="menu">
+                        <div className="menu-profile">
+                            <a href="#" className="menu-profile-link">
+                                <div className="menu-profile-cover with-shadow"></div>
+                                <div className="menu-profile-image">
+                                    <img src="../assets/img/user/user-13.jpg" alt="" />
+                                </div>
+                                <div className="menu-profile-info">
+                                    <div className="d-flex align-items-center">
+                                        <div className="flex-grow-1">Sean Ngu</div>
+                                    </div>
+                                    <small>Frontend developer</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="menu-header">MENU</div>
                         {menus.map((menu, i) => (
                             <NavItem menu={menu} key={i}></NavItem>
                         ))}

@@ -13,7 +13,7 @@ export function AppHeader() {
                 </button>
 
                 <a href="/" className="navbar-brand">
-                    <span className="navbar-logo"></span> <b>Color</b> Admin
+                    <span className="navbar-logo"></span> <b>SCM</b> Admin
                 </a>
             </div>
         </div>
