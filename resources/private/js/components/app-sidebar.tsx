@@ -8,7 +8,7 @@ import { usePage } from '@inertiajs/react';
 import { SharedData } from '@@/types';
 
 function NavItem({ menu, ...props }: { menu: MenuItem }) {
-    let match = location.pathname.split('/').filter(Boolean).pop() == menu.path;
+    let match = location.pathname == menu.path;
 
     let icon = menu.icon && (
         <div className="menu-icon">

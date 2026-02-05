@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Inertia\Inertia;
 
 class RoleController extends Controller
 {
@@ -13,6 +16,14 @@ class RoleController extends Controller
     public function index()
     {
         //
+        $roles = Role::with('permissions')->get();
+       
+        
+        return Inertia::render('role/index', [
+            'roles' => $roles
+        ]);
+
+
     }
 
     /**
