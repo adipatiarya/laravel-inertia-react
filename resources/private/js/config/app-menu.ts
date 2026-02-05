@@ -1,4 +1,6 @@
 // Define the interface for a menu item
+import { admin_dashboard } from '@@/routes';
+import { index } from '@@/routes/users';
 export interface MenuItem {
     path?: string;
     title: string;
@@ -14,7 +16,7 @@ export interface MenuItem {
 // Use the interface to type the Menu array
 const menus: MenuItem[] = [
     {
-        path: 'dashboard',
+        path: admin_dashboard().url,
         icon: 'fa fa-sitemap',
         title: 'Dashboard',
     },
@@ -49,7 +51,7 @@ const menus: MenuItem[] = [
         title: 'User & Role',
 
         children: [
-            { path: '/form/elements', title: 'All User' },
+            { path: index.get().url, title: 'All User' },
             { path: '/form/plugins', title: 'All Role' },
         ],
     },

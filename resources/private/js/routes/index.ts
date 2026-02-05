@@ -213,7 +213,7 @@ home.form = homeForm
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 export const admin_login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: admin_login.url(options),
@@ -222,13 +222,13 @@ export const admin_login = (options?: RouteQueryOptions): RouteDefinition<'get'>
 
 admin_login.definition = {
     methods: ["get","head"],
-    url: '/admin/login',
+    url: '/p4n3lb04rd/login',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 admin_login.url = (options?: RouteQueryOptions) => {
     return admin_login.definition.url + queryParams(options)
@@ -237,7 +237,7 @@ admin_login.url = (options?: RouteQueryOptions) => {
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 admin_login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: admin_login.url(options),
@@ -247,7 +247,7 @@ admin_login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 admin_login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: admin_login.url(options),
@@ -257,7 +257,7 @@ admin_login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 const admin_loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: admin_login.url(options),
@@ -267,7 +267,7 @@ const admin_loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 admin_loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: admin_login.url(options),
@@ -277,7 +277,7 @@ admin_loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 admin_loginForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: admin_login.url({
@@ -294,7 +294,7 @@ admin_login.form = admin_loginForm
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard
 * @see app/Http/Controllers/Private/HomeController.php:11
-* @route '/admin/dashboard'
+* @route '/p4n3lb04rd/dashboard'
 */
 export const admin_dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: admin_dashboard.url(options),
@@ -303,13 +303,13 @@ export const admin_dashboard = (options?: RouteQueryOptions): RouteDefinition<'g
 
 admin_dashboard.definition = {
     methods: ["get","head"],
-    url: '/admin/dashboard',
+    url: '/p4n3lb04rd/dashboard',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard
 * @see app/Http/Controllers/Private/HomeController.php:11
-* @route '/admin/dashboard'
+* @route '/p4n3lb04rd/dashboard'
 */
 admin_dashboard.url = (options?: RouteQueryOptions) => {
     return admin_dashboard.definition.url + queryParams(options)
@@ -318,7 +318,7 @@ admin_dashboard.url = (options?: RouteQueryOptions) => {
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard
 * @see app/Http/Controllers/Private/HomeController.php:11
-* @route '/admin/dashboard'
+* @route '/p4n3lb04rd/dashboard'
 */
 admin_dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: admin_dashboard.url(options),
@@ -328,7 +328,7 @@ admin_dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => (
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard
 * @see app/Http/Controllers/Private/HomeController.php:11
-* @route '/admin/dashboard'
+* @route '/p4n3lb04rd/dashboard'
 */
 admin_dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: admin_dashboard.url(options),
@@ -338,7 +338,7 @@ admin_dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard
 * @see app/Http/Controllers/Private/HomeController.php:11
-* @route '/admin/dashboard'
+* @route '/p4n3lb04rd/dashboard'
 */
 const admin_dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: admin_dashboard.url(options),
@@ -348,7 +348,7 @@ const admin_dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard
 * @see app/Http/Controllers/Private/HomeController.php:11
-* @route '/admin/dashboard'
+* @route '/p4n3lb04rd/dashboard'
 */
 admin_dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: admin_dashboard.url(options),
@@ -358,7 +358,7 @@ admin_dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'ge
 /**
 * @see \App\Http\Controllers\Private\HomeController::admin_dashboard
 * @see app/Http/Controllers/Private/HomeController.php:11
-* @route '/admin/dashboard'
+* @route '/p4n3lb04rd/dashboard'
 */
 admin_dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: admin_dashboard.url({

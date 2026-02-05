@@ -57,62 +57,62 @@ storeb6041c76e8e1cd791f8f89d035d48611.form = storeb6041c76e8e1cd791f8f89d035d486
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
-const store047f8ce2fdeb7128b2677a1dd45b96b8 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store047f8ce2fdeb7128b2677a1dd45b96b8.url(options),
+const store55a28771b5684965fff716215b6b33c2 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store55a28771b5684965fff716215b6b33c2.url(options),
     method: 'post',
 })
 
-store047f8ce2fdeb7128b2677a1dd45b96b8.definition = {
+store55a28771b5684965fff716215b6b33c2.definition = {
     methods: ["post"],
-    url: '/admin/login',
+    url: '/p4n3lb04rd/login',
 } satisfies RouteDefinition<["post"]>
 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
-store047f8ce2fdeb7128b2677a1dd45b96b8.url = (options?: RouteQueryOptions) => {
-    return store047f8ce2fdeb7128b2677a1dd45b96b8.definition.url + queryParams(options)
+store55a28771b5684965fff716215b6b33c2.url = (options?: RouteQueryOptions) => {
+    return store55a28771b5684965fff716215b6b33c2.definition.url + queryParams(options)
 }
 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
-store047f8ce2fdeb7128b2677a1dd45b96b8.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store047f8ce2fdeb7128b2677a1dd45b96b8.url(options),
+store55a28771b5684965fff716215b6b33c2.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store55a28771b5684965fff716215b6b33c2.url(options),
     method: 'post',
 })
 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
-const store047f8ce2fdeb7128b2677a1dd45b96b8Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store047f8ce2fdeb7128b2677a1dd45b96b8.url(options),
+const store55a28771b5684965fff716215b6b33c2Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store55a28771b5684965fff716215b6b33c2.url(options),
     method: 'post',
 })
 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::store
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:58
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
-store047f8ce2fdeb7128b2677a1dd45b96b8Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store047f8ce2fdeb7128b2677a1dd45b96b8.url(options),
+store55a28771b5684965fff716215b6b33c2Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store55a28771b5684965fff716215b6b33c2.url(options),
     method: 'post',
 })
 
-store047f8ce2fdeb7128b2677a1dd45b96b8.form = store047f8ce2fdeb7128b2677a1dd45b96b8Form
+store55a28771b5684965fff716215b6b33c2.form = store55a28771b5684965fff716215b6b33c2Form
 
 export const store = {
     '/login': storeb6041c76e8e1cd791f8f89d035d48611,
-    '/admin/login': store047f8ce2fdeb7128b2677a1dd45b96b8,
+    '/p4n3lb04rd/login': store55a28771b5684965fff716215b6b33c2,
 }
 
 /**
@@ -174,7 +174,7 @@ destroy.form = destroyForm
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::create
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: create.url(options),
@@ -183,13 +183,13 @@ export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => (
 
 create.definition = {
     methods: ["get","head"],
-    url: '/admin/login',
+    url: '/p4n3lb04rd/login',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::create
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 create.url = (options?: RouteQueryOptions) => {
     return create.definition.url + queryParams(options)
@@ -198,7 +198,7 @@ create.url = (options?: RouteQueryOptions) => {
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::create
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: create.url(options),
@@ -208,7 +208,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::create
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: create.url(options),
@@ -218,7 +218,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::create
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: create.url(options),
@@ -228,7 +228,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::create
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: create.url(options),
@@ -238,7 +238,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::create
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/admin/login'
+* @route '/p4n3lb04rd/login'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: create.url({

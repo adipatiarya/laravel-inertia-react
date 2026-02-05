@@ -6,13 +6,14 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\RoutePath;
 
 use App\Http\Controllers\Private\HomeController;
+use App\Http\Controllers\Private\UserController;
 
-Route::prefix('admin')->middleware(['web', 'private'])
+Route::prefix(config('scm.admin_path'))->middleware(['web', 'private'])
     ->group(function () {
      
-           Route::get('/', function() {
-                return redirect()->route('admin_dashboard');
-           });
+          //  Route::get('/', function() {
+          //       return redirect()->route('admindashboard');
+          //  });
 
            Route::get(RoutePath::for('login', '/login'), [AuthenticatedSessionController::class, 'create'])->middleware(['guest:'.config('fortify.guard')])->name('admin_login');
            $limiter = config('fortify.limiters.login');
@@ -25,9 +26,10 @@ Route::prefix('admin')->middleware(['web', 'private'])
 
 
            Route::middleware('auth.private')->group(function() {
-                Route::controller(HomeController::class)->group(function() {
-                        Route::get('/dashboard', 'index')->name('admin_dashboard');
-                });
+
+                Route::get('/dashboard', [HomeController::class, 'index'])->name('admin_dashboard');
+                Route::resource('users', UserController::class);
+
            });
     });
 
