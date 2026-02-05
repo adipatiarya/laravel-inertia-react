@@ -37,7 +37,9 @@ class HandleInertiaRequestsPrivate extends Middleware
     {
 
         $user = $request->user();
-        $user->avatar = 'https://testingbot.com/free-online-tools/random-avatar/300';
+        if($user) {
+             $user->avatar = 'https://testingbot.com/free-online-tools/random-avatar/300';
+        }
         return [
             ...parent::share($request),
             'name' => config('app.name'),

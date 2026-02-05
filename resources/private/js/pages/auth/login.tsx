@@ -21,7 +21,7 @@ export default function Login() {
                             <label htmlFor="emailAddress" className="d-flex align-items-center py-0">
                                 Email Address
                             </label>
-                            {errors.email && <span>{errors.email}</span>}
+                            {errors.email && <span className="text-red-600">{errors.email}</span>}
                         </div>
 
                         <div className="form-floating mb-20px">
@@ -36,7 +36,7 @@ export default function Login() {
                             <label htmlFor="password" className="d-flex align-items-center py-0">
                                 Password
                             </label>
-                            {errors.password && <span>{errors.password}</span>}
+                            {errors.email && <span className="text-red-600">{errors.email}</span>}
                         </div>
                         <div className="form-check mb-20px">
                             <input className="form-check-input" type="checkbox" value="" id="rememberMe" name="remember" />

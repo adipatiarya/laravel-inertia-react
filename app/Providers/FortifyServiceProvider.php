@@ -13,6 +13,12 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 
+use Laravel\Fortify\Contracts\LoginResponse;
+use App\Http\Responses\CustomLoginResponse;
+
+use Laravel\Fortify\Contracts\LogoutResponse;
+use App\Http\Responses\CustomLogoutResponse;
+
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +27,9 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        app()->singleton(LoginResponse::class, CustomLoginResponse::class);
+        app()->singleton(LogoutResponse::class, CustomLogoutResponse::class);
+        
     }
 
     /**

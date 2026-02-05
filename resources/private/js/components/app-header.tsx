@@ -1,6 +1,8 @@
 import { useAppSettings } from '@@/config/app-settings';
 import { SharedData } from '@@/types';
 import { usePage } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
+import { logout } from '@@/routes';
 
 export function AppHeader() {
     const { auth } = usePage<SharedData>().props;
@@ -29,14 +31,14 @@ export function AppHeader() {
                         </span>
                     </a>
                     <div className="dropdown-menu dropdown-menu-end me-1">
-                        <a href="#/" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             Edit Profile
                         </a>
 
                         <div className="dropdown-divider"></div>
-                        <a href="#/" className="dropdown-item">
+                        <Link href={logout()} className="dropdown-item" onClick={() => router.flushAll()}>
                             Log Out
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
