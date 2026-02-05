@@ -1,86 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../wayfinder'
 /**
-* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
-* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/login'
-*/
-export const login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: login.url(options),
-    method: 'get',
-})
-
-login.definition = {
-    methods: ["get","head"],
-    url: '/login',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
-* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/login'
-*/
-login.url = (options?: RouteQueryOptions) => {
-    return login.definition.url + queryParams(options)
-}
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
-* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/login'
-*/
-login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: login.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
-* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/login'
-*/
-login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: login.url(options),
-    method: 'head',
-})
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
-* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/login'
-*/
-const loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: login.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
-* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/login'
-*/
-loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: login.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
-* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
-* @route '/login'
-*/
-loginForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: login.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-login.form = loginForm
-
-/**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::logout
 * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:100
 * @route '/logout'
@@ -292,8 +211,8 @@ homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 home.form = homeForm
 
 /**
-* @see \App\Http\Controllers\Private\AuthController::admin_login
-* @see app/Http/Controllers/Private/AuthController.php:10
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
+* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
 * @route '/admin/login'
 */
 export const admin_login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -307,8 +226,8 @@ admin_login.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Private\AuthController::admin_login
-* @see app/Http/Controllers/Private/AuthController.php:10
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
+* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
 * @route '/admin/login'
 */
 admin_login.url = (options?: RouteQueryOptions) => {
@@ -316,8 +235,8 @@ admin_login.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Private\AuthController::admin_login
-* @see app/Http/Controllers/Private/AuthController.php:10
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
+* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
 * @route '/admin/login'
 */
 admin_login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -326,8 +245,8 @@ admin_login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Private\AuthController::admin_login
-* @see app/Http/Controllers/Private/AuthController.php:10
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
+* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
 * @route '/admin/login'
 */
 admin_login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -336,8 +255,8 @@ admin_login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Private\AuthController::admin_login
-* @see app/Http/Controllers/Private/AuthController.php:10
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
+* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
 * @route '/admin/login'
 */
 const admin_loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -346,8 +265,8 @@ const admin_loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 })
 
 /**
-* @see \App\Http\Controllers\Private\AuthController::admin_login
-* @see app/Http/Controllers/Private/AuthController.php:10
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
+* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
 * @route '/admin/login'
 */
 admin_loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -356,8 +275,8 @@ admin_loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 })
 
 /**
-* @see \App\Http\Controllers\Private\AuthController::admin_login
-* @see app/Http/Controllers/Private/AuthController.php:10
+* @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::admin_login
+* @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
 * @route '/admin/login'
 */
 admin_loginForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

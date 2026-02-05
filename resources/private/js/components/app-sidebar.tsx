@@ -4,6 +4,8 @@ import menus, { MenuItem } from '@@/config/app-menu';
 import { useEffect } from 'react';
 import initSidebar from '@@/hooks/init-sidebar';
 import { cn } from '@@/lib/util';
+import { usePage } from '@inertiajs/react';
+import { SharedData } from '@@/types';
 
 function NavItem({ menu, ...props }: { menu: MenuItem }) {
     let match = location.pathname.split('/').filter(Boolean).pop() == menu.path;
@@ -49,6 +51,7 @@ function NavItem({ menu, ...props }: { menu: MenuItem }) {
 
 export function AppSidebar() {
     const { toggleSidebarOpen, toggleSidebarMobileOpen } = useAppSettings();
+    const { auth } = usePage<SharedData>().props;
 
     useEffect(() => {
         initSidebar();
@@ -63,11 +66,11 @@ export function AppSidebar() {
                             <a href="#" className="menu-profile-link">
                                 <div className="menu-profile-cover with-shadow"></div>
                                 <div className="menu-profile-image">
-                                    <img src="../assets/img/user/user-13.jpg" alt="" />
+                                    <img src={auth.user.avatar} alt="" />
                                 </div>
                                 <div className="menu-profile-info">
                                     <div className="d-flex align-items-center">
-                                        <div className="d-flex">Sean Ngu</div>
+                                        <div className="d-flex">{auth.user.name}</div>
                                     </div>
                                     <small>Frontend developer</small>
                                 </div>

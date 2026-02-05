@@ -14,6 +14,9 @@ Route::middleware(['web','public'])->group(function () {
     // Route::get('dashboard', function () {
     //     return Inertia::render('dashboard');
     // })->middleware(['auth', 'verified'])->name('dashboard');
+     Route::get('/login', function () {
+        return abort(404);
+    });
 
 });
 

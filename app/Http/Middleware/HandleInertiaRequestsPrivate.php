@@ -35,11 +35,14 @@ class HandleInertiaRequestsPrivate extends Middleware
      */
     public function share(Request $request): array
     {
+
+        $user = $request->user();
+        $user->avatar = 'https://testingbot.com/free-online-tools/random-avatar/300';
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $user,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
