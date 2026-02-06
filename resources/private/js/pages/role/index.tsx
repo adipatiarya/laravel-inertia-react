@@ -1,6 +1,7 @@
 import React from 'react';
 import AppLayout from '@@/layouts/app-layout';
 import { AppContent } from '@@/components/app-content';
+import { Panel, PanelBody, PanelHeader } from '@@/components/ui/panel';
 
 type Role = {
     id: number;
@@ -15,7 +16,7 @@ const Index: React.FC<RolesProps> = ({ roles }) => {
     return (
         <AppLayout title="Roles">
             <AppContent>
-                <div className="panel">
+                {/* <div className="panel">
                     <div className="panel-body">
                         <table className="table-bordered table">
                             <thead>
@@ -36,7 +37,13 @@ const Index: React.FC<RolesProps> = ({ roles }) => {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> */}
+                <Panel>
+                    <PanelHeader noButton={false}>JUDUL</PanelHeader>
+                    <PanelBody>
+                        <div>BODY</div>
+                    </PanelBody>
+                </Panel>
             </AppContent>
         </AppLayout>
     );
