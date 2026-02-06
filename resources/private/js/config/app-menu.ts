@@ -1,7 +1,8 @@
 // Define the interface for a menu item
 import { admin_dashboard } from '@@/routes';
-import { index as user } from '@@/routes/users';
-import { index as role } from '@@/routes/roles';
+import userUrl from '@@/routes/users';
+import roleUrl from '@@/routes/roles';
+
 export interface MenuItem {
     path?: string;
     title: string;
@@ -47,23 +48,23 @@ const menus: MenuItem[] = [
     },
 
     {
-        path: user.get().url,
-        icon: 'fa fa-list-ol',
+        path: userUrl.index.get().url,
+        icon: 'fa fa-users',
         title: 'User',
 
         children: [
-            { path: user.get().url, title: 'All User' },
-            { path: '/form/plugins', title: 'Create New' },
+            { path: userUrl.index.get().url, title: 'All User' },
+            { path: userUrl.create.get().url, title: 'Create New' },
         ],
     },
     {
-        path: role.get().url,
+        path: roleUrl.index.get().url,
         icon: 'fa fa-list-ol',
         title: 'Role & Permission',
 
         children: [
-            { path: role.get().url, title: 'All Role' },
-            { path: '/form/plugins', title: 'Create New' },
+            { path: roleUrl.index.get().url, title: 'All Role' },
+            { path: roleUrl.create.get().url, title: 'Create New' },
         ],
     },
 ];

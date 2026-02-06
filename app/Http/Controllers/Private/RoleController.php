@@ -32,6 +32,9 @@ class RoleController extends Controller
     public function create()
     {
         //
+         return Inertia::render('role/form', [
+            'modules' => config('scm.modules')
+        ]);
     }
 
     /**

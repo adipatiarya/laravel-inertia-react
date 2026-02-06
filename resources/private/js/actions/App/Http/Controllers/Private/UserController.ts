@@ -163,7 +163,7 @@ create.form = createForm
 
 /**
 * @see \App\Http\Controllers\Private\UserController::store
-* @see app/Http/Controllers/Private/UserController.php:51
+* @see app/Http/Controllers/Private/UserController.php:52
 * @route '/p4n3lb04rd/users'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -178,7 +178,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\UserController::store
-* @see app/Http/Controllers/Private/UserController.php:51
+* @see app/Http/Controllers/Private/UserController.php:52
 * @route '/p4n3lb04rd/users'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -187,7 +187,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Private\UserController::store
-* @see app/Http/Controllers/Private/UserController.php:51
+* @see app/Http/Controllers/Private/UserController.php:52
 * @route '/p4n3lb04rd/users'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -197,7 +197,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\UserController::store
-* @see app/Http/Controllers/Private/UserController.php:51
+* @see app/Http/Controllers/Private/UserController.php:52
 * @route '/p4n3lb04rd/users'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -207,7 +207,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \App\Http\Controllers\Private\UserController::store
-* @see app/Http/Controllers/Private/UserController.php:51
+* @see app/Http/Controllers/Private/UserController.php:52
 * @route '/p4n3lb04rd/users'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -219,7 +219,7 @@ store.form = storeForm
 
 /**
 * @see \App\Http\Controllers\Private\UserController::show
-* @see app/Http/Controllers/Private/UserController.php:59
+* @see app/Http/Controllers/Private/UserController.php:60
 * @route '/p4n3lb04rd/users/{user}'
 */
 export const show = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -234,7 +234,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\UserController::show
-* @see app/Http/Controllers/Private/UserController.php:59
+* @see app/Http/Controllers/Private/UserController.php:60
 * @route '/p4n3lb04rd/users/{user}'
 */
 show.url = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -261,7 +261,7 @@ show.url = (args: { user: string | number } | [user: string | number ] | string 
 
 /**
 * @see \App\Http\Controllers\Private\UserController::show
-* @see app/Http/Controllers/Private/UserController.php:59
+* @see app/Http/Controllers/Private/UserController.php:60
 * @route '/p4n3lb04rd/users/{user}'
 */
 show.get = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -271,7 +271,7 @@ show.get = (args: { user: string | number } | [user: string | number ] | string 
 
 /**
 * @see \App\Http\Controllers\Private\UserController::show
-* @see app/Http/Controllers/Private/UserController.php:59
+* @see app/Http/Controllers/Private/UserController.php:60
 * @route '/p4n3lb04rd/users/{user}'
 */
 show.head = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -281,7 +281,7 @@ show.head = (args: { user: string | number } | [user: string | number ] | string
 
 /**
 * @see \App\Http\Controllers\Private\UserController::show
-* @see app/Http/Controllers/Private/UserController.php:59
+* @see app/Http/Controllers/Private/UserController.php:60
 * @route '/p4n3lb04rd/users/{user}'
 */
 const showForm = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -291,7 +291,7 @@ const showForm = (args: { user: string | number } | [user: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\Private\UserController::show
-* @see app/Http/Controllers/Private/UserController.php:59
+* @see app/Http/Controllers/Private/UserController.php:60
 * @route '/p4n3lb04rd/users/{user}'
 */
 showForm.get = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -301,7 +301,7 @@ showForm.get = (args: { user: string | number } | [user: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Private\UserController::show
-* @see app/Http/Controllers/Private/UserController.php:59
+* @see app/Http/Controllers/Private/UserController.php:60
 * @route '/p4n3lb04rd/users/{user}'
 */
 showForm.head = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -318,7 +318,7 @@ show.form = showForm
 
 /**
 * @see \App\Http\Controllers\Private\UserController::edit
-* @see app/Http/Controllers/Private/UserController.php:67
+* @see app/Http/Controllers/Private/UserController.php:68
 * @route '/p4n3lb04rd/users/{user}/edit'
 */
 export const edit = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -333,7 +333,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\UserController::edit
-* @see app/Http/Controllers/Private/UserController.php:67
+* @see app/Http/Controllers/Private/UserController.php:68
 * @route '/p4n3lb04rd/users/{user}/edit'
 */
 edit.url = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -360,7 +360,7 @@ edit.url = (args: { user: string | number } | [user: string | number ] | string 
 
 /**
 * @see \App\Http\Controllers\Private\UserController::edit
-* @see app/Http/Controllers/Private/UserController.php:67
+* @see app/Http/Controllers/Private/UserController.php:68
 * @route '/p4n3lb04rd/users/{user}/edit'
 */
 edit.get = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -370,7 +370,7 @@ edit.get = (args: { user: string | number } | [user: string | number ] | string 
 
 /**
 * @see \App\Http\Controllers\Private\UserController::edit
-* @see app/Http/Controllers/Private/UserController.php:67
+* @see app/Http/Controllers/Private/UserController.php:68
 * @route '/p4n3lb04rd/users/{user}/edit'
 */
 edit.head = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -380,7 +380,7 @@ edit.head = (args: { user: string | number } | [user: string | number ] | string
 
 /**
 * @see \App\Http\Controllers\Private\UserController::edit
-* @see app/Http/Controllers/Private/UserController.php:67
+* @see app/Http/Controllers/Private/UserController.php:68
 * @route '/p4n3lb04rd/users/{user}/edit'
 */
 const editForm = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -390,7 +390,7 @@ const editForm = (args: { user: string | number } | [user: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\Private\UserController::edit
-* @see app/Http/Controllers/Private/UserController.php:67
+* @see app/Http/Controllers/Private/UserController.php:68
 * @route '/p4n3lb04rd/users/{user}/edit'
 */
 editForm.get = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -400,7 +400,7 @@ editForm.get = (args: { user: string | number } | [user: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Private\UserController::edit
-* @see app/Http/Controllers/Private/UserController.php:67
+* @see app/Http/Controllers/Private/UserController.php:68
 * @route '/p4n3lb04rd/users/{user}/edit'
 */
 editForm.head = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -417,7 +417,7 @@ edit.form = editForm
 
 /**
 * @see \App\Http\Controllers\Private\UserController::update
-* @see app/Http/Controllers/Private/UserController.php:75
+* @see app/Http/Controllers/Private/UserController.php:76
 * @route '/p4n3lb04rd/users/{user}'
 */
 export const update = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -432,7 +432,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\UserController::update
-* @see app/Http/Controllers/Private/UserController.php:75
+* @see app/Http/Controllers/Private/UserController.php:76
 * @route '/p4n3lb04rd/users/{user}'
 */
 update.url = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -459,7 +459,7 @@ update.url = (args: { user: string | number } | [user: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\Private\UserController::update
-* @see app/Http/Controllers/Private/UserController.php:75
+* @see app/Http/Controllers/Private/UserController.php:76
 * @route '/p4n3lb04rd/users/{user}'
 */
 update.put = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -469,7 +469,7 @@ update.put = (args: { user: string | number } | [user: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\Private\UserController::update
-* @see app/Http/Controllers/Private/UserController.php:75
+* @see app/Http/Controllers/Private/UserController.php:76
 * @route '/p4n3lb04rd/users/{user}'
 */
 update.patch = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -479,7 +479,7 @@ update.patch = (args: { user: string | number } | [user: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Private\UserController::update
-* @see app/Http/Controllers/Private/UserController.php:75
+* @see app/Http/Controllers/Private/UserController.php:76
 * @route '/p4n3lb04rd/users/{user}'
 */
 const updateForm = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -494,7 +494,7 @@ const updateForm = (args: { user: string | number } | [user: string | number ] |
 
 /**
 * @see \App\Http\Controllers\Private\UserController::update
-* @see app/Http/Controllers/Private/UserController.php:75
+* @see app/Http/Controllers/Private/UserController.php:76
 * @route '/p4n3lb04rd/users/{user}'
 */
 updateForm.put = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -509,7 +509,7 @@ updateForm.put = (args: { user: string | number } | [user: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\Private\UserController::update
-* @see app/Http/Controllers/Private/UserController.php:75
+* @see app/Http/Controllers/Private/UserController.php:76
 * @route '/p4n3lb04rd/users/{user}'
 */
 updateForm.patch = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -526,7 +526,7 @@ update.form = updateForm
 
 /**
 * @see \App\Http\Controllers\Private\UserController::destroy
-* @see app/Http/Controllers/Private/UserController.php:83
+* @see app/Http/Controllers/Private/UserController.php:84
 * @route '/p4n3lb04rd/users/{user}'
 */
 export const destroy = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -541,7 +541,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\UserController::destroy
-* @see app/Http/Controllers/Private/UserController.php:83
+* @see app/Http/Controllers/Private/UserController.php:84
 * @route '/p4n3lb04rd/users/{user}'
 */
 destroy.url = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -568,7 +568,7 @@ destroy.url = (args: { user: string | number } | [user: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\Private\UserController::destroy
-* @see app/Http/Controllers/Private/UserController.php:83
+* @see app/Http/Controllers/Private/UserController.php:84
 * @route '/p4n3lb04rd/users/{user}'
 */
 destroy.delete = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -578,7 +578,7 @@ destroy.delete = (args: { user: string | number } | [user: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\Private\UserController::destroy
-* @see app/Http/Controllers/Private/UserController.php:83
+* @see app/Http/Controllers/Private/UserController.php:84
 * @route '/p4n3lb04rd/users/{user}'
 */
 const destroyForm = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -593,7 +593,7 @@ const destroyForm = (args: { user: string | number } | [user: string | number ] 
 
 /**
 * @see \App\Http\Controllers\Private\UserController::destroy
-* @see app/Http/Controllers/Private/UserController.php:83
+* @see app/Http/Controllers/Private/UserController.php:84
 * @route '/p4n3lb04rd/users/{user}'
 */
 destroyForm.delete = (args: { user: string | number } | [user: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
