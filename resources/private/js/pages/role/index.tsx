@@ -1,72 +1,156 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import AppLayout from '@@/layouts/app-layout';
 import { AppContent } from '@@/components/app-content';
-import { Panel, PanelBody, PanelHeader } from '@@/components/ui/panel';
+import { slideToggle } from '@@/hooks/init-sidebar';
+import { cn } from '@@/lib/util';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+
+import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
+
+import { index, create } from '@@/routes/roles';
 
 type Role = {
     id: number;
     name: string;
+    created_at: string;
+    updated_at: string;
 };
 
-type RolesProps = {
-    roles: Role[];
-};
+const Index = () => {
+    const [data, setData] = useState<Role[]>([]);
+    const [reload, setReload] = useState(false);
 
-const Index: React.FC<RolesProps> = ({ roles }) => {
+    async function fetchData() {
+        setReload(true);
+        try {
+            const res = await fetch(index.get().url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            });
+            setReload(false);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const json = await res.json();
+            setData(json.data);
+        } catch (err) {
+            console.error('Fetch error:', err);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+    const columns: ColumnDef<Role>[] = [
+        { accessorKey: 'id', header: '#' },
+        { accessorKey: 'name', header: 'Role Name' },
+        {
+            accessorKey: 'permissions',
+            header: 'Permission',
+            cell: (info) => {
+                return (
+                    <button className="btn btn-xs btn-success" onClick={() => null}>
+                        <i className="fa fa-eye"></i> Show
+                    </button>
+                );
+            },
+        },
+        {
+            accessorKey: 'created_at',
+            header: 'Created At',
+            cell: (info) => dayjs(info.getValue() as Role['created_at']).format('DD-MMM-YYYY HH:mm'),
+        },
+        { accessorKey: 'created_by', header: 'Created By', cell: () => 'John Doe' },
+        {
+            accessorKey: 'updated_at',
+            header: 'Last Updated',
+            cell: (info) => dayjs(info.getValue() as Role['updated_at']).fromNow(),
+        },
+        { accessorKey: 'created_by', header: 'Last Updated By', cell: () => 'Kusnuadi.spd' },
+        {
+            id: 'actions', // gunakan id, bukan accessorKey kosong
+            header: 'Actions',
+
+            cell: ({ row }) => {
+                const role = row.original; // akses data row
+                return (
+                    <div className="d-flex justify-content-center gap-2">
+                        <button className="btn btn-sm btn-warning" onClick={() => console.log('Edit', role.id)}>
+                            <i className="fa fa-edit"></i> Edit
+                        </button>
+                        <button className="btn btn-sm btn-danger" onClick={() => console.log('Delete', role.id)}>
+                            {' '}
+                            <i className="fa fa-trash"></i> Delete
+                        </button>
+                    </div>
+                );
+            },
+        },
+    ];
+
+    const table = useReactTable({
+        data,
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+    });
+
     return (
         <AppLayout title="Roles">
             <AppContent>
-                <Panel>
-                    <PanelHeader>Role</PanelHeader>
-                    <PanelBody>
+                <div className={cn('panel panel-inverse', reload && 'panel-loading')}>
+                    <div className="panel-heading">
+                        <h4 className="panel-title">All Role</h4>
+
+                        <div className="panel-heading-btn">
+                            <a className="btn btn-xs btn-icon btn-circle btn-danger me-1" href={create.get().url}>
+                                <i className="fa fa-plus"></i>
+                            </a>
+                            <button className="btn btn-xs btn-icon btn-circle btn-success" onClick={fetchData}>
+                                <i className="fa fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="panel-body">
                         <div className="table-responsive">
                             <table className="table">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Permission</th>
-                                        <th>Created By</th>
-                                        <th>Created At</th>
-                                        <th>Last Updated</th>
-                                        <th>Last Updated By</th>
-                                        <th className="text-center">Action</th>
-                                    </tr>
+                                    {table.getHeaderGroups().map((headerGroup) => (
+                                        <tr key={headerGroup.id}>
+                                            {headerGroup.headers.map((header) => (
+                                                <th key={header.id} className={cn(header.id == 'actions' && 'text-center')}>
+                                                    {flexRender(header.column.columnDef.header, header.getContext())}
+                                                </th>
+                                            ))}
+                                        </tr>
+                                    ))}
                                 </thead>
+
                                 <tbody>
-                                    {roles.map((role) => (
-                                        <tr key={role.id}>
-                                            <td>{role.id}</td>
-                                            <td>{role.name}</td>
-                                            <td>
-                                                <button className="btn btn-info btn-xs">
-                                                    <i className="fa fa-eye" />
-                                                    <span className="text-white-300 ms-1">show</span>
-                                                </button>
-                                            </td>
-                                            <td>System</td>
-                                            <td>12-Jan-2022 14:50</td>
-                                            <td>12-Jan-2022 14:50</td>
-                                            <td>Juned</td>
-                                            <td>
-                                                <div className="d-flex justify-content-center">
-                                                    <button className="btn btn-warning btn-xs">
-                                                        <i className="fa fa-edit" />
-                                                        <span className="text-white-300 ms-1">edit</span>
-                                                    </button>
-                                                    <button className="btn btn-danger btn-xs ms-1">
-                                                        <i className="fa fa-trash" />
-                                                        <span className="text-white-300 ms-1">delete</span>
-                                                    </button>
-                                                </div>
-                                            </td>
+                                    {table.getRowModel().rows.map((row) => (
+                                        <tr key={row.id}>
+                                            {row.getVisibleCells().map((cell) => (
+                                                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                                            ))}
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         </div>
-                    </PanelBody>
-                </Panel>
+                        {reload && (
+                            <div className="panel-loader">
+                                <span className="spinner spinner-sm"></span>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </AppContent>
         </AppLayout>
     );

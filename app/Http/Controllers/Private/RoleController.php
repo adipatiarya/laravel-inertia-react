@@ -7,21 +7,26 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Inertia\Inertia;
+use Yajra\DataTables\Facades\DataTables;
+use App\Libraries\AppHelper;
 
 class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $roles = Role::with('permissions')->get();
-       
+        if($request->ajax()) {
+
+            $roles = Role::with('permissions')->get();
+            $datatables = DataTables::make($roles)
+                        ->addColumn('permissions', fn($role) => AppHelper::permissionsTransform($role->permissions))
+                        ->toJson();
+            return $datatables;
+        }
         
-        return Inertia::render('role/index', [
-            'roles' => $roles
-        ]);
+        return Inertia::render('role/index');
 
 
     }
