@@ -132,7 +132,7 @@ const Index: React.FC<ModuleProps> = () => {
                                     <i className="fa fa-th"></i> <span className="ms-1">Manage {capitalizeFirst(m)}</span>
                                 </h4>
                                 <p>
-                                    Role Manage to create, read , update, delete in {m} {Object.keys(modules[m])}
+                                    Role Manage to {Object.keys(modules[m]).join(', ')} in {m}
                                 </p>
                                 <div className="card">
                                     <div className="list-group list-group-flush fw-bold">
