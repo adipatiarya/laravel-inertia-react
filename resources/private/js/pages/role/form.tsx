@@ -147,15 +147,28 @@ const Index: React.FC<ModuleProps> = () => {
                                                     <input
                                                         className="form-check-input"
                                                         type="checkbox"
-                                                        checked={modules[m][x]} // ambil nilai boolean dari state
+                                                        disabled={m === 'roles' && x === 'read' && (modules.users.create || modules.users.update)}
+                                                        checked={modules[m][x]} // nilai boolean dari state
                                                         onChange={() =>
-                                                            setModules((prev) => ({
-                                                                ...prev,
-                                                                [m]: {
-                                                                    ...prev[m],
-                                                                    [x]: !prev[m][x], // toggle true/false
-                                                                },
-                                                            }))
+                                                            setModules((prev) => {
+                                                                const updated = {
+                                                                    ...prev,
+                                                                    [m]: {
+                                                                        ...prev[m],
+                                                                        [x]: !prev[m][x], // toggle permission
+                                                                    },
+                                                                };
+
+                                                                // aturan otomatis: jika users.create atau users.update true → roles.read true
+                                                                if (m === 'users' && (updated.users.create || updated.users.update)) {
+                                                                    updated.roles = {
+                                                                        ...updated.roles,
+                                                                        read: true,
+                                                                    };
+                                                                }
+
+                                                                return updated;
+                                                            })
                                                         }
                                                     />
                                                 </div>
