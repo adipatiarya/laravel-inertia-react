@@ -3,3 +3,6 @@ import { type ClassValue, clsx } from 'clsx';
 export function cn(...inputs: ClassValue[]) {
     return clsx(inputs);
 }
+export function capitalizeFirst(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

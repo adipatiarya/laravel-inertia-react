@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AppLayout from '@@/layouts/app-layout';
 import { AppContent } from '@@/components/app-content';
-import { cn } from '@@/lib/util';
+import { capitalizeFirst, cn } from '@@/lib/util';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
@@ -9,59 +9,142 @@ dayjs.extend(relativeTime);
 import { index } from '@@/routes/roles';
 import Breadcrumb from '@@/components/ui/breadcrumb';
 
-type Role = {
-    id: number;
-    name: string;
-    created_at: string;
-    updated_at: string;
+type ModuleProps = {
+    modules: string[];
 };
 
-const Index = () => {
-    const [data, setData] = useState<Role[]>([]);
-    const [reload, setReload] = useState(false);
+const Index: React.FC<ModuleProps> = ({ modules }) => {
     const pageTitle = 'Role & Permission';
-
-    async function fetchData() {
-        setReload(true);
-        try {
-            const res = await fetch(index.get().url, {
-                method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                },
-            });
-            setReload(false);
-
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-
-            const json = await res.json();
-            setData(json.data);
-        } catch (err) {
-            console.error('Fetch error:', err);
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const [active, setActive] = useState(modules[0]);
 
     return (
         <AppLayout title="Create New">
             <AppContent>
                 <Breadcrumb data={[{ title: pageTitle, href: index.get().url }, { title: 'Create New' }]} />
-                <h1 className="page-header">Create New</h1>
-                <div className="clearfix"></div>
-                <div className={cn('panel panel-inverse', reload && 'panel-loading')}>
-                    <div className="panel-body">
-                        {reload && (
-                            <div className="panel-loader">
-                                <span className="spinner spinner-sm"></span>
+                <h1 className="page-header">Create New Role</h1>
+                <hr className="mb-4"></hr>
+                <div className="row">
+                    <div className="col-xl-8"></div>
+                </div>
+
+                <div className="row">
+                    <div style={{ width: '230px' }}>
+                        <nav className="navbar navbar-sticky d-none d-xl-block my-n4 h-100 py-4 text-end">
+                            <nav className="nav" id="bsSpyTarget">
+                                <a
+                                    className={cn('nav-link', 'create' == active && 'active')}
+                                    href={'#' + 'create'}
+                                    data-toggle="scroll-to"
+                                    onClick={() => {
+                                        setActive('create');
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth', // bisa "auto" kalau tidak mau animasi
+                                        });
+                                    }}
+                                >
+                                    <h6>New Role</h6>
+                                </a>
+                                <hr />
+                                {modules.map((m, i) => (
+                                    <a
+                                        className={cn('nav-link', m == active && 'active')}
+                                        href={'#' + m}
+                                        data-toggle="scroll-to"
+                                        key={i}
+                                        onClick={() => setActive(m)}
+                                    >
+                                        Manage {capitalizeFirst(m)}
+                                    </a>
+                                ))}
+                                <hr />
+                                <a
+                                    className={cn('nav-link', 'submit' == active && 'active')}
+                                    href={'#' + 'submit'}
+                                    data-toggle="scroll-to"
+                                    onClick={() => {
+                                        setActive('submit');
+                                    }}
+                                >
+                                    <h6>Submit</h6>
+                                </a>
+                            </nav>
+                        </nav>
+                    </div>
+
+                    <div className="col-xl-8" id="bsSpyContent">
+                        <div className="mb-5 pb-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="form-group">
+                                        <label className="form-label">
+                                            Role Name <span className="text-red">*</span>
+                                        </label>
+                                        <input className="form-control form-control-lg" placeholder="Choose role name" required />
+                                    </div>
+                                </div>
                             </div>
-                        )}
+                        </div>
+                        {modules.map((m, i) => (
+                            <div id={m} className="mb-4 pb-3" key={i}>
+                                <h4 className="d-flex align-items-center mb-2">
+                                    <i className="fa fa-th"></i> <span className="ms-1">Manage {capitalizeFirst(m)}</span>
+                                </h4>
+                                <p>Role Manage to create, read , update, delete in {m}</p>
+                                <div className="card">
+                                    <div className="list-group list-group-flush fw-bold">
+                                        <div className="list-group-item d-flex align-items-center">
+                                            <div className="flex-fill">
+                                                <div>Create</div>
+                                                <div className="text-body text-opacity-60">Role can access create {m}.</div>
+                                            </div>
+
+                                            <div className="form-check form-switch w-100px">
+                                                <input className="form-check-input" type="checkbox" checked />
+                                            </div>
+                                        </div>
+                                        <div className="list-group-item d-flex align-items-center">
+                                            <div className="flex-fill">
+                                                <div>Read</div>
+                                                <div className="text-body text-opacity-60">Role can access edit {m}.</div>
+                                            </div>
+                                            <div className="form-check form-switch w-100px">
+                                                <input className="form-check-input" type="checkbox" checked />
+                                            </div>
+                                        </div>
+                                        <div className="list-group-item d-flex align-items-center">
+                                            <div className="flex-fill">
+                                                <div>Update</div>
+                                                <div className="text-body text-opacity-60">Role can access update {m}.</div>
+                                            </div>
+                                            <div className="form-check form-switch w-100px">
+                                                <input className="form-check-input" type="checkbox" checked />
+                                            </div>
+                                        </div>
+                                        <div className="list-group-item d-flex align-items-center">
+                                            <div className="flex-fill">
+                                                <div>Delete</div>
+                                                <div className="text-body text-opacity-60">Role can access delete {m}.</div>
+                                            </div>
+                                            <div className="form-check form-switch w-100px">
+                                                <input className="form-check-input" type="checkbox" checked />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        <div className="mb-5 pb-3" id="submit">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="form-group">
+                                        <button type="submit" className="btn btn-primary">
+                                            SUBMIT
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </AppContent>
