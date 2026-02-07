@@ -33,5 +33,17 @@ class AppHelper
 
         return $result;
     }
+
+    public static function permissionsSpatieFormater($permissions = []) {
+        $result = [];
+        foreach ($permissions as $module => $actions) {
+            foreach ($actions as $action => $value) {
+                if ($value === true) {
+                    $result[] = "{$action} {$module}";
+                }
+            }
+        }
+        return $result;
+    }
 }
 

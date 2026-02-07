@@ -18,5 +18,7 @@
     </head>
     <body>
         @inertia('root')
+        @routes
     </body>
+
 </html>

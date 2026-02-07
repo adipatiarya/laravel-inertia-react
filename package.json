@@ -47,8 +47,10 @@
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "react-perfect-scrollbar": "^1.5.8",
+        "react-toastify": "^11.0.5",
         "typescript": "^5.7.2",
-        "vite": "^7.0.4"
+        "vite": "^7.0.4",
+        "ziggy-js": "^2.6.0"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "4.9.5",

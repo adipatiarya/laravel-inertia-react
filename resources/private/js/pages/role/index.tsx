@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AppLayout from '@@/layouts/app-layout';
 import { AppContent } from '@@/components/app-content';
 import { cn } from '@@/lib/util';
@@ -10,6 +10,7 @@ import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack
 
 import { index, create } from '@@/routes/roles';
 import Breadcrumb from '@@/components/ui/breadcrumb';
+import { usePage } from '@inertiajs/react';
 
 type Role = {
     id: number;
@@ -18,38 +19,12 @@ type Role = {
     updated_at: string;
 };
 
-const Index = () => {
-    const [data, setData] = useState<Role[]>([]);
+const Index = ({ data }: { data: Role[] }) => {
     const [reload, setReload] = useState(false);
+    const { props } = usePage();
     const pageTitle = 'Role & Permission';
+    const success = (props.flash as any)?.success;
 
-    async function fetchData() {
-        setReload(true);
-        try {
-            const res = await fetch(index.get().url, {
-                method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                },
-            });
-            setReload(false);
-
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-
-            const json = await res.json();
-            setData(json.data);
-        } catch (err) {
-            console.error('Fetch error:', err);
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
     const columns: ColumnDef<Role>[] = [
         { accessorKey: 'id', header: '#' },
         { accessorKey: 'name', header: 'Role Name' },
@@ -111,13 +86,13 @@ const Index = () => {
                 <div className="clearfix"></div>
                 <div className={cn('panel panel-inverse', reload && 'panel-loading')}>
                     <div className="panel-heading">
-                        <h4 className="panel-title">Data Role</h4>
+                        <h4 className="panel-title">Data Role {JSON.stringify(props.errors)}</h4>
 
                         <div className="panel-heading-btn">
                             <a className="btn btn-xs btn-icon btn-circle btn-danger me-1" href={create.get().url}>
                                 <i className="fa fa-plus"></i>
                             </a>
-                            <button className="btn btn-xs btn-icon btn-circle btn-success" onClick={fetchData}>
+                            <button className="btn btn-xs btn-icon btn-circle btn-success" onClick={() => null}>
                                 <i className="fa fa-redo"></i>
                             </button>
                         </div>
@@ -128,8 +103,8 @@ const Index = () => {
                                 <thead>
                                     {table.getHeaderGroups().map((headerGroup) => (
                                         <tr key={headerGroup.id}>
-                                            {headerGroup.headers.map((header) => (
-                                                <th key={header.id} className={cn(header.id == 'actions' && 'text-center')}>
+                                            {headerGroup.headers.map((header, idx) => (
+                                                <th key={idx} className={cn(header.id == 'actions' && 'text-center')}>
                                                     {flexRender(header.column.columnDef.header, header.getContext())}
                                                 </th>
                                             ))}
@@ -138,10 +113,10 @@ const Index = () => {
                                 </thead>
 
                                 <tbody>
-                                    {table.getRowModel().rows.map((row) => (
-                                        <tr key={row.id}>
-                                            {row.getVisibleCells().map((cell) => (
-                                                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                                    {table.getRowModel().rows.map((row, idx) => (
+                                        <tr key={idx}>
+                                            {row.getVisibleCells().map((cell, idx) => (
+                                                <td key={idx}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
                                             ))}
                                         </tr>
                                     ))}
