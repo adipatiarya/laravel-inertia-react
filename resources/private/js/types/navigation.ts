@@ -1,4 +1,4 @@
 export type BreadcrumbItem = {
     title: string;
-    href: string;
+    href?: string;
 };
