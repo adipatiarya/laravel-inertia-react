@@ -4,7 +4,7 @@ namespace App\Libraries;
 class AppHelper
 {
     
-    public static function permissionsTransform($permissions = [] )
+    public static function permissionsTransform($permissions = [], $edit= false )
     {
       
         $result = [];
@@ -20,9 +20,14 @@ class AppHelper
                         'delete' => false,
                     ];
                 }
-                if (isset($result[$entity][$action])) {
-                    $result[$entity][$action] = true;
+                if($edit) {
+                    if (isset($result[$entity][$action])) {
+                        $result[$entity][$action] = true;
+                    }
+                } else {
+                     $result[$entity][$action] = false;
                 }
+                
             }
         }
 

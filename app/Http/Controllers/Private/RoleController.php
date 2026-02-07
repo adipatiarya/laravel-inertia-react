@@ -34,12 +34,25 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-         return Inertia::render('role/form', [
-            'modules' => config('scm.modules')
-        ]);
+        
+        if( $request->ajax() ) {
+            
+            $result = [];
+            
+            $permissions = ["create","read","update", "delete"];
+        
+            foreach (config('scm.modules') as $transform) {
+                foreach ($permissions as $permission) {
+                    $result[] = (object)['name' => $permission . ' ' . $transform];
+                }
+            }
+            return response()->json(['modules' => AppHelper::permissionsTransform($result)]);
+        }
+
+       
+         return Inertia::render('role/form');
     }
 
     /**

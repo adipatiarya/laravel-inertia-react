@@ -6,16 +6,56 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-import { index } from '@@/routes/roles';
+import { create, index } from '@@/routes/roles';
 import Breadcrumb from '@@/components/ui/breadcrumb';
 
 type ModuleProps = {
-    modules: string[];
+    [key: string]: {
+        [permission: string]: boolean;
+    };
 };
 
-const Index: React.FC<ModuleProps> = ({ modules }) => {
+const Index: React.FC<ModuleProps> = () => {
     const pageTitle = 'Role & Permission';
-    const [active, setActive] = useState(modules[0]);
+    const [active, setActive] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const [modules, setModules] = useState<ModuleProps>({});
+
+    async function fetchData() {
+        try {
+            setLoading(true);
+            const res = await fetch(create.get().url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            });
+            setLoading(false);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const json = await res.json();
+            setModules(json.modules);
+        } catch (err) {
+            console.error('Fetch error:', err);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return (
+            <div id="loader" className="app-loader">
+                <span className="spinner"></span>
+            </div>
+        );
+    }
 
     return (
         <AppLayout title="Create New">
@@ -46,7 +86,7 @@ const Index: React.FC<ModuleProps> = ({ modules }) => {
                                     <h6>New Role</h6>
                                 </a>
                                 <hr />
-                                {modules.map((m, i) => (
+                                {Object.keys(modules).map((m, i) => (
                                     <a
                                         className={cn('nav-link', m == active && 'active')}
                                         href={'#' + m}
@@ -57,6 +97,7 @@ const Index: React.FC<ModuleProps> = ({ modules }) => {
                                         Manage {capitalizeFirst(m)}
                                     </a>
                                 ))}
+
                                 <hr />
                                 <a
                                     className={cn('nav-link', 'submit' == active && 'active')}
@@ -85,51 +126,41 @@ const Index: React.FC<ModuleProps> = ({ modules }) => {
                                 </div>
                             </div>
                         </div>
-                        {modules.map((m, i) => (
+                        {Object.keys(modules).map((m, i) => (
                             <div id={m} className="mb-4 pb-3" key={i}>
                                 <h4 className="d-flex align-items-center mb-2">
                                     <i className="fa fa-th"></i> <span className="ms-1">Manage {capitalizeFirst(m)}</span>
                                 </h4>
-                                <p>Role Manage to create, read , update, delete in {m}</p>
+                                <p>
+                                    Role Manage to create, read , update, delete in {m} {Object.keys(modules[m])}
+                                </p>
                                 <div className="card">
                                     <div className="list-group list-group-flush fw-bold">
-                                        <div className="list-group-item d-flex align-items-center">
-                                            <div className="flex-fill">
-                                                <div>Create</div>
-                                                <div className="text-body text-opacity-60">Role can access create {m}.</div>
-                                            </div>
+                                        {Object.keys(modules[m]).map((x, id) => (
+                                            <div className="list-group-item d-flex align-items-center" key={id}>
+                                                <div className="flex-fill">
+                                                    <div>{capitalizeFirst(x)}</div>
+                                                    <div className="text-body text-opacity-60">Role can access {x}.</div>
+                                                </div>
 
-                                            <div className="form-check form-switch w-100px">
-                                                <input className="form-check-input" type="checkbox" checked />
+                                                <div className="form-check form-switch w-100px">
+                                                    <input
+                                                        className="form-check-input"
+                                                        type="checkbox"
+                                                        checked={modules[m][x]} // ambil nilai boolean dari state
+                                                        onChange={() =>
+                                                            setModules((prev) => ({
+                                                                ...prev,
+                                                                [m]: {
+                                                                    ...prev[m],
+                                                                    [x]: !prev[m][x], // toggle true/false
+                                                                },
+                                                            }))
+                                                        }
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="list-group-item d-flex align-items-center">
-                                            <div className="flex-fill">
-                                                <div>Read</div>
-                                                <div className="text-body text-opacity-60">Role can access edit {m}.</div>
-                                            </div>
-                                            <div className="form-check form-switch w-100px">
-                                                <input className="form-check-input" type="checkbox" checked />
-                                            </div>
-                                        </div>
-                                        <div className="list-group-item d-flex align-items-center">
-                                            <div className="flex-fill">
-                                                <div>Update</div>
-                                                <div className="text-body text-opacity-60">Role can access update {m}.</div>
-                                            </div>
-                                            <div className="form-check form-switch w-100px">
-                                                <input className="form-check-input" type="checkbox" checked />
-                                            </div>
-                                        </div>
-                                        <div className="list-group-item d-flex align-items-center">
-                                            <div className="flex-fill">
-                                                <div>Delete</div>
-                                                <div className="text-body text-opacity-60">Role can access delete {m}.</div>
-                                            </div>
-                                            <div className="form-check form-switch w-100px">
-                                                <input className="form-check-input" type="checkbox" checked />
-                                            </div>
-                                        </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -137,6 +168,7 @@ const Index: React.FC<ModuleProps> = ({ modules }) => {
                         <div className="mb-5 pb-3" id="submit">
                             <div className="card">
                                 <div className="card-body">
+                                    {JSON.stringify(modules)}
                                     <div className="form-group">
                                         <button type="submit" className="btn btn-primary">
                                             SUBMIT
