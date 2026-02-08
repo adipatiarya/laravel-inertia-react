@@ -30,8 +30,15 @@ Route::prefix(config('scm.admin_path'))->middleware(['web', 'private'])
 
                Route::get('/dashboard', [HomeController::class, 'index'])->name('admin_dashboard');
                Route::resource('users', UserController::class);
-               Route::resource('roles', RoleController::class);
 
+               Route::prefix('roles')->group(function() {
+                    Route::controller(RoleController::class) ->group(function () {
+                        Route::get(NULL, 'index')->name('roles.index');
+                        Route::post(NULL, 'store')->name('roles.store');
+                        Route::get('create', 'create')->name('roles.create');
+                        Route::get('json', 'json')->name('roles.json');   
+                    });
+                });
            });
     });
 

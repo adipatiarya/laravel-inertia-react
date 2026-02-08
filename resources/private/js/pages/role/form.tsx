@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-import { store, index } from '@@/routes/roles';
+import { index } from '@@/routes/roles';
 import Breadcrumb from '@@/components/ui/breadcrumb';
 import { useForm } from '@inertiajs/react';
 import { TextInput } from '@@/components/ui/TextInput';

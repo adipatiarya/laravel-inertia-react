@@ -1,36 +1,69 @@
+import { useEffect, useState } from 'react';
 import AppLayout from '@@/layouts/app-layout';
 import { AppContent } from '@@/components/app-content';
+import { cn } from '@@/lib/util';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
+import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
+
 import { index, create } from '@@/routes/roles';
 import Breadcrumb from '@@/components/ui/breadcrumb';
-import { PaginatedResponse } from '@@/types';
-import { useEffect, useState } from 'react';
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { router } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
 import { route } from 'ziggy-js';
-import { cn } from '@@/lib/util';
-
-type Permission = {
-    id: number;
-    name: string;
-};
 
 type Role = {
     id: number;
     name: string;
     created_at: string;
     updated_at: string;
-    permissions: Permission[];
 };
 
-const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
+const Index = () => {
+    const [reload, setReload] = useState(false);
+    const [data, setData] = useState<Role[]>([]);
+    const pageCount = 10;
+
     const [pagination, setPagination] = useState({
-        pageIndex: data.current_page - 1, // TanStack 0-based
-        pageSize: data.per_page,
+        pageIndex: 0, // TanStack is 0-based
+        pageSize: 10,
     });
+
+    const pageTitle = 'Role & Permission';
+
+    async function fetchData() {
+        setReload(true);
+        // const params = { page: pagination.pageIndex + 1, perPage: pagination.pageSize };
+        try {
+            const res = await fetch(route('roles.json'), {
+                method: 'GET',
+
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            });
+
+            setReload(false);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const json = await res.json();
+            //setPagination({ pageIndex: data.current_page - 1, pageSize: data.per_page });
+            setData(json.data);
+        } catch (err) {
+            console.error('Fetch error:', err);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [pagination]);
+
     const columns: ColumnDef<Role>[] = [
         { accessorKey: 'id', header: '#' },
         { accessorKey: 'name', header: 'Role Name' },
@@ -77,28 +110,24 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
             },
         },
     ];
+
     const table = useReactTable({
-        data: data.data,
+        data,
         columns,
-        pageCount: data.last_page,
+        getCoreRowModel: getCoreRowModel(),
+        pageCount, // total pages from backend
         state: { pagination },
         onPaginationChange: setPagination,
-        getCoreRowModel: getCoreRowModel(),
-        manualPagination: true,
+        manualPagination: true, // important!
     });
-    // trigger Inertia fetch saat pagination berubah
-    useEffect(() => {
-        router.get(route('roles.index'), { page: pagination.pageIndex + 1, perPage: pagination.pageSize }, { preserveState: true, replace: true });
-    }, [pagination]);
 
-    const pageTitle = 'Role & Permission';
     return (
         <AppLayout title={pageTitle}>
             <AppContent>
                 <Breadcrumb data={[{ title: pageTitle, href: index.get().url }, { title: 'All Role' }]} />
                 <h1 className="page-header">{pageTitle}</h1>
                 <div className="clearfix"></div>
-                <div className={cn('panel panel-inverse')}>
+                <div className={cn('panel panel-inverse', reload && 'panel-loading')}>
                     <div className="panel-heading">
                         <h4 className="panel-title">Data Role</h4>
 
@@ -106,6 +135,9 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
                             <a className="btn btn-xs btn-icon btn-circle btn-danger me-1" href={create.get().url}>
                                 <i className="fa fa-plus"></i>
                             </a>
+                            <button className="btn btn-xs btn-icon btn-circle btn-success" onClick={fetchData}>
+                                <i className="fa fa-redo"></i>
+                            </button>
                         </div>
                     </div>
                     <div className="panel-body">
@@ -134,6 +166,11 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
                                 </tbody>
                             </table>
                         </div>
+                        {reload && (
+                            <div className="panel-loader">
+                                <span className="spinner spinner-sm"></span>
+                            </div>
+                        )}
                     </div>
                 </div>
                 {/* Pagination Controls */}
@@ -147,11 +184,11 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
                     <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
                         {'>'}
                     </button>
-                    <button onClick={() => table.setPageIndex(data.last_page - 1)} disabled={!table.getCanNextPage()}>
+                    <button onClick={() => table.setPageIndex(pageCount - 1)} disabled={!table.getCanNextPage()}>
                         {'>>'}
                     </button>
                     <span>
-                        Page {pagination.pageIndex + 1} of {data.last_page}
+                        Page {pagination.pageIndex + 1} of {pageCount}
                     </span>
                     <select value={pagination.pageSize} onChange={(e) => table.setPageSize(Number(e.target.value))}>
                         {[10, 20, 30, 50].map((size) => (

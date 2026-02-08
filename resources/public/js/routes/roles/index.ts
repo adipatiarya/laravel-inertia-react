@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Private\RoleController::index
 * @see app/Http/Controllers/Private/RoleController.php:19
@@ -81,8 +81,64 @@ indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 index.form = indexForm
 
 /**
+* @see \App\Http\Controllers\Private\RoleController::store
+* @see app/Http/Controllers/Private/RoleController.php:81
+* @route '/p4n3lb04rd/roles'
+*/
+export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
+store.definition = {
+    methods: ["post"],
+    url: '/p4n3lb04rd/roles',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\Private\RoleController::store
+* @see app/Http/Controllers/Private/RoleController.php:81
+* @route '/p4n3lb04rd/roles'
+*/
+store.url = (options?: RouteQueryOptions) => {
+    return store.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Private\RoleController::store
+* @see app/Http/Controllers/Private/RoleController.php:81
+* @route '/p4n3lb04rd/roles'
+*/
+store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\Private\RoleController::store
+* @see app/Http/Controllers/Private/RoleController.php:81
+* @route '/p4n3lb04rd/roles'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\Private\RoleController::store
+* @see app/Http/Controllers/Private/RoleController.php:81
+* @route '/p4n3lb04rd/roles'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
+
+/**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:41
+* @see app/Http/Controllers/Private/RoleController.php:60
 * @route '/p4n3lb04rd/roles/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -97,7 +153,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:41
+* @see app/Http/Controllers/Private/RoleController.php:60
 * @route '/p4n3lb04rd/roles/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -106,7 +162,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:41
+* @see app/Http/Controllers/Private/RoleController.php:60
 * @route '/p4n3lb04rd/roles/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -116,7 +172,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:41
+* @see app/Http/Controllers/Private/RoleController.php:60
 * @route '/p4n3lb04rd/roles/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -126,7 +182,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:41
+* @see app/Http/Controllers/Private/RoleController.php:60
 * @route '/p4n3lb04rd/roles/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -136,7 +192,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:41
+* @see app/Http/Controllers/Private/RoleController.php:60
 * @route '/p4n3lb04rd/roles/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -146,7 +202,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:41
+* @see app/Http/Controllers/Private/RoleController.php:60
 * @route '/p4n3lb04rd/roles/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -162,150 +218,76 @@ createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 create.form = createForm
 
 /**
-* @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:62
-* @route '/p4n3lb04rd/roles'
+* @see \App\Http\Controllers\Private\RoleController::json
+* @see app/Http/Controllers/Private/RoleController.php:42
+* @route '/p4n3lb04rd/roles/json'
 */
-export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
-    method: 'post',
-})
-
-store.definition = {
-    methods: ["post"],
-    url: '/p4n3lb04rd/roles',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:62
-* @route '/p4n3lb04rd/roles'
-*/
-store.url = (options?: RouteQueryOptions) => {
-    return store.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:62
-* @route '/p4n3lb04rd/roles'
-*/
-store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:62
-* @route '/p4n3lb04rd/roles'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:62
-* @route '/p4n3lb04rd/roles'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::show
-* @see app/Http/Controllers/Private/RoleController.php:97
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-export const show = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show.url(args, options),
+export const json = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: json.url(options),
     method: 'get',
 })
 
-show.definition = {
+json.definition = {
     methods: ["get","head"],
-    url: '/p4n3lb04rd/roles/{role}',
+    url: '/p4n3lb04rd/roles/json',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Private\RoleController::show
-* @see app/Http/Controllers/Private/RoleController.php:97
-* @route '/p4n3lb04rd/roles/{role}'
+* @see \App\Http\Controllers\Private\RoleController::json
+* @see app/Http/Controllers/Private/RoleController.php:42
+* @route '/p4n3lb04rd/roles/json'
 */
-show.url = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { role: args }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            role: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-        role: args.role,
-    }
-
-    return show.definition.url
-            .replace('{role}', parsedArgs.role.toString())
-            .replace(/\/+$/, '') + queryParams(options)
+json.url = (options?: RouteQueryOptions) => {
+    return json.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\Private\RoleController::show
-* @see app/Http/Controllers/Private/RoleController.php:97
-* @route '/p4n3lb04rd/roles/{role}'
+* @see \App\Http\Controllers\Private\RoleController::json
+* @see app/Http/Controllers/Private/RoleController.php:42
+* @route '/p4n3lb04rd/roles/json'
 */
-show.get = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show.url(args, options),
+json.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: json.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Private\RoleController::show
-* @see app/Http/Controllers/Private/RoleController.php:97
-* @route '/p4n3lb04rd/roles/{role}'
+* @see \App\Http\Controllers\Private\RoleController::json
+* @see app/Http/Controllers/Private/RoleController.php:42
+* @route '/p4n3lb04rd/roles/json'
 */
-show.head = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: show.url(args, options),
+json.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: json.url(options),
     method: 'head',
 })
 
 /**
-* @see \App\Http\Controllers\Private\RoleController::show
-* @see app/Http/Controllers/Private/RoleController.php:97
-* @route '/p4n3lb04rd/roles/{role}'
+* @see \App\Http\Controllers\Private\RoleController::json
+* @see app/Http/Controllers/Private/RoleController.php:42
+* @route '/p4n3lb04rd/roles/json'
 */
-const showForm = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
+const jsonForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: json.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Private\RoleController::show
-* @see app/Http/Controllers/Private/RoleController.php:97
-* @route '/p4n3lb04rd/roles/{role}'
+* @see \App\Http\Controllers\Private\RoleController::json
+* @see app/Http/Controllers/Private/RoleController.php:42
+* @route '/p4n3lb04rd/roles/json'
 */
-showForm.get = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
+jsonForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: json.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Private\RoleController::show
-* @see app/Http/Controllers/Private/RoleController.php:97
-* @route '/p4n3lb04rd/roles/{role}'
+* @see \App\Http\Controllers\Private\RoleController::json
+* @see app/Http/Controllers/Private/RoleController.php:42
+* @route '/p4n3lb04rd/roles/json'
 */
-showForm.head = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
+jsonForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: json.url({
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -314,308 +296,13 @@ showForm.head = (args: { role: string | number } | [role: string | number ] | st
     method: 'get',
 })
 
-show.form = showForm
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::edit
-* @see app/Http/Controllers/Private/RoleController.php:105
-* @route '/p4n3lb04rd/roles/{role}/edit'
-*/
-export const edit = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: edit.url(args, options),
-    method: 'get',
-})
-
-edit.definition = {
-    methods: ["get","head"],
-    url: '/p4n3lb04rd/roles/{role}/edit',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::edit
-* @see app/Http/Controllers/Private/RoleController.php:105
-* @route '/p4n3lb04rd/roles/{role}/edit'
-*/
-edit.url = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { role: args }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            role: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-        role: args.role,
-    }
-
-    return edit.definition.url
-            .replace('{role}', parsedArgs.role.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::edit
-* @see app/Http/Controllers/Private/RoleController.php:105
-* @route '/p4n3lb04rd/roles/{role}/edit'
-*/
-edit.get = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::edit
-* @see app/Http/Controllers/Private/RoleController.php:105
-* @route '/p4n3lb04rd/roles/{role}/edit'
-*/
-edit.head = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: edit.url(args, options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::edit
-* @see app/Http/Controllers/Private/RoleController.php:105
-* @route '/p4n3lb04rd/roles/{role}/edit'
-*/
-const editForm = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::edit
-* @see app/Http/Controllers/Private/RoleController.php:105
-* @route '/p4n3lb04rd/roles/{role}/edit'
-*/
-editForm.get = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::edit
-* @see app/Http/Controllers/Private/RoleController.php:105
-* @route '/p4n3lb04rd/roles/{role}/edit'
-*/
-editForm.head = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::update
-* @see app/Http/Controllers/Private/RoleController.php:113
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-export const update = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
-    method: 'put',
-})
-
-update.definition = {
-    methods: ["put","patch"],
-    url: '/p4n3lb04rd/roles/{role}',
-} satisfies RouteDefinition<["put","patch"]>
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::update
-* @see app/Http/Controllers/Private/RoleController.php:113
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-update.url = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { role: args }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            role: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-        role: args.role,
-    }
-
-    return update.definition.url
-            .replace('{role}', parsedArgs.role.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::update
-* @see app/Http/Controllers/Private/RoleController.php:113
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-update.put = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
-    method: 'put',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::update
-* @see app/Http/Controllers/Private/RoleController.php:113
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-update.patch = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
-    url: update.url(args, options),
-    method: 'patch',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::update
-* @see app/Http/Controllers/Private/RoleController.php:113
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-const updateForm = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::update
-* @see app/Http/Controllers/Private/RoleController.php:113
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-updateForm.put = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::update
-* @see app/Http/Controllers/Private/RoleController.php:113
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-updateForm.patch = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::destroy
-* @see app/Http/Controllers/Private/RoleController.php:121
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-export const destroy = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(args, options),
-    method: 'delete',
-})
-
-destroy.definition = {
-    methods: ["delete"],
-    url: '/p4n3lb04rd/roles/{role}',
-} satisfies RouteDefinition<["delete"]>
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::destroy
-* @see app/Http/Controllers/Private/RoleController.php:121
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-destroy.url = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { role: args }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            role: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-        role: args.role,
-    }
-
-    return destroy.definition.url
-            .replace('{role}', parsedArgs.role.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::destroy
-* @see app/Http/Controllers/Private/RoleController.php:121
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-destroy.delete = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(args, options),
-    method: 'delete',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::destroy
-* @see app/Http/Controllers/Private/RoleController.php:121
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-const destroyForm = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Private\RoleController::destroy
-* @see app/Http/Controllers/Private/RoleController.php:121
-* @route '/p4n3lb04rd/roles/{role}'
-*/
-destroyForm.delete = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
+json.form = jsonForm
 
 const roles = {
     index: Object.assign(index, index),
-    create: Object.assign(create, create),
     store: Object.assign(store, store),
-    show: Object.assign(show, show),
-    edit: Object.assign(edit, edit),
-    update: Object.assign(update, update),
-    destroy: Object.assign(destroy, destroy),
+    create: Object.assign(create, create),
+    json: Object.assign(json, json),
 }
 
 export default roles

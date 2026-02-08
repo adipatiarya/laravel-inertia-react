@@ -19,21 +19,40 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         
-        $roles = Role::with('permissions')->get();
-        $rolesWithPermissions = $roles->map(function ($role) {
-            $role->permissions= AppHelper::permissionsTransform($role->permissions);
+        // ambil parameter perPage dari request (default 10)
+        $perPage = $request->input('perPage', 10);
+
+        // ambil data dengan pagination
+        $roles = Role::with('permissions')->paginate($perPage);
+
+        // transformasi permissions agar lebih rapi
+        $roles->getCollection()->transform(function ($role) {
+            $role->permissions = AppHelper::permissionsTransform($role->permissions);
             return $role;
         });
 
-
-      //  $datatables = DataTables::collection($roles)->addColumn('permissions', fn($role) => AppHelper::permissionsTransform($role->permissions));
-      //  dd($roles);
-          
+        // kirim ke Inertia (React)
         return Inertia::render('role/index', [
-            'data' => $rolesWithPermissions
+            'data' => $roles,
         ]);
 
+
+
     }
+   public function json(Request $request) {
+
+        if(!$request->ajax()) {
+            abort(404);
+        }
+
+        $roles = Role::with('permissions')->paginate(request('perPage', 10)); // default 10 per page
+        return $roles;
+
+        // return DataTables::collection($roles->items())
+        //     ->addColumn('permissions', fn($role) => AppHelper::permissionsTransform($role->permissions))
+        //     ->toJson();
+
+   }
 
     /**
      * Show the form for creating a new resource.
