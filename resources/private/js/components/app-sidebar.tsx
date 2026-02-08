@@ -10,8 +10,10 @@ import { SharedData } from '@@/types';
 function NavItem({ menu, ...props }: { menu: MenuItem }) {
     let match = location.pathname == menu.path;
 
-    if (menu.children) {
-        match = menu.children.some((x) => location.pathname == x.path);
+    if (menu.path && menu.children) {
+        const seg1 = location.pathname.split('/').filter(Boolean);
+        const seg2 = menu.path.split('/').filter(Boolean);
+        match = seg1[1] == seg2[1];
     }
     let icon = menu.icon && (
         <div className="menu-icon">

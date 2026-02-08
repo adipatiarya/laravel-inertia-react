@@ -18,6 +18,7 @@ type ModulePermission = {
     };
 };
 type RoleProps = {
+    id?: string;
     name: string;
     permissions: ModulePermission;
 };
@@ -25,10 +26,14 @@ type RoleProps = {
 const RoleForm: React.FC<RoleProps> = (props) => {
     const pageTitle = 'Role & Permission';
     const [active, setActive] = useState('');
-    const { data, setData, post, processing, errors } = useForm(props);
+    const { data, setData, post, put, processing, errors } = useForm(props);
     function submit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-        post(route('roles.store'));
+        if (props.id) {
+            put(route('roles.update', props.id));
+        } else {
+            post(route('roles.store'));
+        }
     }
 
     return (

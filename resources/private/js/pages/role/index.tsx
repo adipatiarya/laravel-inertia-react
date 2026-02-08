@@ -44,7 +44,7 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
         pageIndex: data.current_page - 1, // TanStack 0-based
         pageSize: data.per_page,
     });
-    const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([]);
+    const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([{ id: 'created_at', desc: true }]);
 
     const columns: ColumnDef<Role>[] = [
         { accessorKey: 'id', header: '#', enableSorting: false },
@@ -84,9 +84,9 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
                 const role = row.original; // akses data row
                 return (
                     <div className="d-flex justify-content-center gap-2">
-                        <button className="btn btn-sm btn-warning" onClick={() => console.log('Edit', role.id)}>
+                        <a className="btn btn-sm btn-warning" href={route('roles.edit', role.id)}>
                             <i className="fa fa-edit"></i> Edit
-                        </button>
+                        </a>
                         <button className="btn btn-sm btn-danger" onClick={() => console.log('Delete', role.id)}>
                             {' '}
                             <i className="fa fa-trash"></i> Delete
@@ -172,9 +172,9 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
                                 <thead>
                                     {table.getHeaderGroups().map((headerGroup) => (
                                         <tr key={headerGroup.id}>
-                                            {headerGroup.headers.map((header) => (
+                                            {headerGroup.headers.map((header, idx) => (
                                                 <th
-                                                    key={header.id}
+                                                    key={idx}
                                                     onClick={header.column.getToggleSortingHandler()}
                                                     className={cn(
                                                         header.column.getCanSort() && 'cursor-pointer',

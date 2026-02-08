@@ -17,68 +17,38 @@ class RoleController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    $perPage = $request->input('perPage', 10);
-
-    $sortBy = $request->input('sortBy', 'id');
-
-    $sortDir = $request->input('sortDir', 'asc');
-
-    $search = $request->input('search');
-
-    $query = Role::with('permissions');
-
-    if ($search) {
-        $query->where('name', 'like', "%{$search}%")
-              ->orWhereHas('permissions', function ($q) use ($search) {
-                  $q->where('name', 'like', "%{$search}%");
-              });
-    }
-    
-    $roles = $query->orderBy($sortBy, $sortDir)->paginate($perPage);
-
-    $roles->getCollection()->transform(function ($role) {
-        $role->permissions = AppHelper::permissionsTransform($role->permissions);
-        return $role;
-    });
-
-    return Inertia::render('role/index', [
-        'data' => $roles,
-    ]);
-}
-   public function json(Request $request) {
-
-        if(!$request->ajax()) {
-            abort(404);
+    {
+        $perPage = $request->input('perPage', 10);
+        $sortBy = $request->input('sortBy', 'id');
+        $sortDir = $request->input('sortDir', 'asc');
+        $search = $request->input('search');
+        $query = Role::with('permissions');
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhereHas('permissions', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+            });
         }
 
-        $roles = Role::with('permissions')->paginate(request('perPage', 10)); // default 10 per page
-        return $roles;
+        $roles = $query->orderBy($sortBy, $sortDir)->paginate($perPage);
+        $roles->getCollection()->transform(function ($role) {
+            $role->permissions = AppHelper::permissionsTransformer($role);
+            return $role;
+        });
 
-        // return DataTables::collection($roles->items())
-        //     ->addColumn('permissions', fn($role) => AppHelper::permissionsTransform($role->permissions))
-        //     ->toJson();
-
-   }
-
+        return Inertia::render('role/index', [
+            'data' => $roles,
+        ]);
+    }
+  
     /**
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
     {
-        $result = [];
-
-        $permissions = ["create","read","update", "delete"];
-
-        foreach (config('scm.modules') as $transform) {
-            foreach ($permissions as $permission) {
-                $result[] = (object)['name' => $permission . ' ' . $transform];
-            }
-        }
-           
         return Inertia::render('role/form', [
             'name' => '',
-            'permissions' => AppHelper::permissionsTransform($result)
+            'permissions' => AppHelper::permissionsTransformer()
         ] );
     }
 
@@ -109,9 +79,6 @@ class RoleController extends Controller
             });
             Inertia::flash('success', 'User created successfully!');
             return to_route('roles.index');
-
-
-
         } catch (\Throwable $th) {
             return back()->withErrors(['general' => 'Terjadi kesalahan saat menyimpan role.'])->withInput();
         }
@@ -125,21 +92,48 @@ class RoleController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function edit(Role $role)
     {
-        //
+        return Inertia::render('role/form', [
+            'id' => $role->id,
+            'name' => $role->name,
+            'permissions' => AppHelper::permissionsTransformer($role)
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+         $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name,' . $role->id,
+            'permissions' => 'array',
+        ]);
+  
+        $result = AppHelper::permissionsSpatieFormater($request->permissions);
+
+        if (!count($result)) {
+            return back()
+            ->withErrors(['permissions' => 'Minimal 1 permissions.'])
+            ->withInput();
+        }
+
+         try {
+            DB::transaction(function () use ($validated, $result, $role) {
+                app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+                $role->update(['name' => $validated['name']]);
+                $role->syncPermissions([]);
+                $role->givePermissionTo($result);
+            });
+
+            Inertia::flash('success', 'Role updated successfully');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Inertia::flash('success', $th->getMessage());
+            return redirect()->back();
+        }
     }
+
+
 
     /**
      * Remove the specified resource from storage.
