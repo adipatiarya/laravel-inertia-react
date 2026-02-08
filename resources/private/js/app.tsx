@@ -6,6 +6,7 @@ import 'bootstrap';
 
 import '@fortawesome/fontawesome-free/css/all.css';
 import '../css/styles.scss';
+import { ErrorBoundary } from './components/app-error';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -18,9 +19,14 @@ createInertiaApp({
 
         root.render(
             <StrictMode>
-                <App {...props} />
+                <ErrorBoundary>
+                    <App {...props} />
+                </ErrorBoundary>
             </StrictMode>,
         );
     },
-    progress: false,
+    progress: {
+        color: '#29d', // warna bar
+        delay: 250, // jeda sebelum muncul (ms)
+    },
 });

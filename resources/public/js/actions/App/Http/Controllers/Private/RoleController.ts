@@ -82,7 +82,7 @@ index.form = indexForm
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:81
+* @see app/Http/Controllers/Private/RoleController.php:88
 * @route '/p4n3lb04rd/roles'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -97,7 +97,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:81
+* @see app/Http/Controllers/Private/RoleController.php:88
 * @route '/p4n3lb04rd/roles'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -106,7 +106,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:81
+* @see app/Http/Controllers/Private/RoleController.php:88
 * @route '/p4n3lb04rd/roles'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -116,7 +116,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:81
+* @see app/Http/Controllers/Private/RoleController.php:88
 * @route '/p4n3lb04rd/roles'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -126,7 +126,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::store
-* @see app/Http/Controllers/Private/RoleController.php:81
+* @see app/Http/Controllers/Private/RoleController.php:88
 * @route '/p4n3lb04rd/roles'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -138,7 +138,7 @@ store.form = storeForm
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:60
+* @see app/Http/Controllers/Private/RoleController.php:67
 * @route '/p4n3lb04rd/roles/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -153,7 +153,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:60
+* @see app/Http/Controllers/Private/RoleController.php:67
 * @route '/p4n3lb04rd/roles/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -162,7 +162,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:60
+* @see app/Http/Controllers/Private/RoleController.php:67
 * @route '/p4n3lb04rd/roles/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -172,7 +172,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:60
+* @see app/Http/Controllers/Private/RoleController.php:67
 * @route '/p4n3lb04rd/roles/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -182,7 +182,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:60
+* @see app/Http/Controllers/Private/RoleController.php:67
 * @route '/p4n3lb04rd/roles/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -192,7 +192,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:60
+* @see app/Http/Controllers/Private/RoleController.php:67
 * @route '/p4n3lb04rd/roles/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -202,7 +202,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::create
-* @see app/Http/Controllers/Private/RoleController.php:60
+* @see app/Http/Controllers/Private/RoleController.php:67
 * @route '/p4n3lb04rd/roles/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -219,7 +219,7 @@ create.form = createForm
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::json
-* @see app/Http/Controllers/Private/RoleController.php:42
+* @see app/Http/Controllers/Private/RoleController.php:49
 * @route '/p4n3lb04rd/roles/json'
 */
 export const json = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -234,7 +234,7 @@ json.definition = {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::json
-* @see app/Http/Controllers/Private/RoleController.php:42
+* @see app/Http/Controllers/Private/RoleController.php:49
 * @route '/p4n3lb04rd/roles/json'
 */
 json.url = (options?: RouteQueryOptions) => {
@@ -243,7 +243,7 @@ json.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::json
-* @see app/Http/Controllers/Private/RoleController.php:42
+* @see app/Http/Controllers/Private/RoleController.php:49
 * @route '/p4n3lb04rd/roles/json'
 */
 json.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -253,7 +253,7 @@ json.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::json
-* @see app/Http/Controllers/Private/RoleController.php:42
+* @see app/Http/Controllers/Private/RoleController.php:49
 * @route '/p4n3lb04rd/roles/json'
 */
 json.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -263,7 +263,7 @@ json.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::json
-* @see app/Http/Controllers/Private/RoleController.php:42
+* @see app/Http/Controllers/Private/RoleController.php:49
 * @route '/p4n3lb04rd/roles/json'
 */
 const jsonForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -273,7 +273,7 @@ const jsonForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::json
-* @see app/Http/Controllers/Private/RoleController.php:42
+* @see app/Http/Controllers/Private/RoleController.php:49
 * @route '/p4n3lb04rd/roles/json'
 */
 jsonForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -283,7 +283,7 @@ jsonForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Private\RoleController::json
-* @see app/Http/Controllers/Private/RoleController.php:42
+* @see app/Http/Controllers/Private/RoleController.php:49
 * @route '/p4n3lb04rd/roles/json'
 */
 jsonForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

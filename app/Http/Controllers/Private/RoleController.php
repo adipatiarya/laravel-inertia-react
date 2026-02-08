@@ -17,28 +17,35 @@ class RoleController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        
-        // ambil parameter perPage dari request (default 10)
-        $perPage = $request->input('perPage', 10);
+{
+    $perPage = $request->input('perPage', 10);
 
-        // ambil data dengan pagination
-        $roles = Role::with('permissions')->paginate($perPage);
+    $sortBy = $request->input('sortBy', 'id');
 
-        // transformasi permissions agar lebih rapi
-        $roles->getCollection()->transform(function ($role) {
-            $role->permissions = AppHelper::permissionsTransform($role->permissions);
-            return $role;
-        });
+    $sortDir = $request->input('sortDir', 'asc');
 
-        // kirim ke Inertia (React)
-        return Inertia::render('role/index', [
-            'data' => $roles,
-        ]);
+    $search = $request->input('search');
 
+    $query = Role::with('permissions');
 
-
+    if ($search) {
+        $query->where('name', 'like', "%{$search}%")
+              ->orWhereHas('permissions', function ($q) use ($search) {
+                  $q->where('name', 'like', "%{$search}%");
+              });
     }
+    
+    $roles = $query->orderBy($sortBy, $sortDir)->paginate($perPage);
+
+    $roles->getCollection()->transform(function ($role) {
+        $role->permissions = AppHelper::permissionsTransform($role->permissions);
+        return $role;
+    });
+
+    return Inertia::render('role/index', [
+        'data' => $roles,
+    ]);
+}
    public function json(Request $request) {
 
         if(!$request->ajax()) {
