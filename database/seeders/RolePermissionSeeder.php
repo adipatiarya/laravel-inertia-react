@@ -15,31 +15,44 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         //
-         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-         $modules = config('scm.modules');
+        $modules = config('scm.modules');
 
-         foreach($modules as $module) {
+        foreach ($modules as $module) {
+            $permissions = ['create', 'read', 'update', 'delete'];
 
-              $permissions = ['create','read', 'update', 'delete'];
-
-              foreach($permissions as $permission) {
-
-                $name = $permission.' '.$module;
+            foreach ($permissions as $permission) {
+                $name = $permission . ' ' . $module;
 
                 Permission::firstOrCreate(['name' => $name]);
+                \Log::info($name . ' Created success ');
+            }
 
-                echo $name. ' Created success ';
-
-              }
-
-              echo PHP_EOL; 
-         }
+            echo PHP_EOL;
+        }
 
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         $role = Role::firstOrCreate(['name' => 'superadmin']);
+        $role->syncPermissions([]);
         $role->givePermissionTo(Permission::all());
-        echo 'OK';
 
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        $role2 = Role::firstOrCreate(['name' => 'Content Creator']);
+        $role2->syncPermissions([]);
+
+        $role2->givePermissionTo([
+            'create posts',
+            'read posts',
+            'update posts',
+            'delete posts',
+            'create pages',
+            'update pages',
+            'read pages',
+            'delete pages',
+        ]);
+
+        \Log::info('Created success ');
     }
 }

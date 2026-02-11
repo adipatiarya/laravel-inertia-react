@@ -1,6 +1,6 @@
 import { useAppSettings } from '@@/config/app-settings';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import menus, { MenuItem } from '@@/config/app-menu';
+import { MenuConfig, MenuItem } from '@@/config/app-menu';
 import { useEffect } from 'react';
 import initSidebar from '@@/hooks/init-sidebar';
 import { cn } from '@@/lib/util';
@@ -45,9 +45,11 @@ function NavItem({ menu, ...props }: { menu: MenuItem }) {
             </a>
             {menu.children && (
                 <div className="menu-submenu">
-                    {menu.children.map((submenu, i) => (
-                        <NavItem key={i} menu={submenu} />
-                    ))}
+                    {menu.children
+                        .filter((s) => s.show)
+                        .map((submenu, i) => (
+                            <NavItem key={i} menu={submenu} />
+                        ))}
                 </div>
             )}
         </div>
@@ -57,6 +59,7 @@ function NavItem({ menu, ...props }: { menu: MenuItem }) {
 export function AppSidebar() {
     const { toggleSidebarOpen, toggleSidebarMobileOpen } = useAppSettings();
     const { auth } = usePage<SharedData>().props;
+    const menus = MenuConfig();
 
     useEffect(() => {
         initSidebar();
@@ -77,14 +80,16 @@ export function AppSidebar() {
                                     <div className="d-flex align-items-center">
                                         <div className="d-flex">{auth.user.name}</div>
                                     </div>
-                                    <small>Frontend developer</small>
+                                    <small>{auth.user.role}</small>
                                 </div>
                             </a>
                         </div>
                         <div className="menu-header">MENU</div>
-                        {menus.map((menu, i) => (
-                            <NavItem menu={menu} key={i}></NavItem>
-                        ))}
+                        {menus
+                            .filter((s) => s.show)
+                            .map((menu, i) => (
+                                <NavItem menu={menu} key={i}></NavItem>
+                            ))}
                         <div className="menu-item d-flex">
                             <a
                                 href="#"

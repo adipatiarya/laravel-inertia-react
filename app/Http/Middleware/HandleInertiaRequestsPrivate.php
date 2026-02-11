@@ -7,7 +7,7 @@ use Inertia\Middleware;
 
 class HandleInertiaRequestsPrivate extends Middleware
 {
-     /**
+    /**
      * The root template that's loaded on the first page visit.
      *
      * @see https://inertiajs.com/server-side-setup#root-template
@@ -35,18 +35,20 @@ class HandleInertiaRequestsPrivate extends Middleware
      */
     public function share(Request $request): array
     {
-
         $user = $request->user();
-        if($user) {
-             $user->avatar = 'https://testingbot.com/free-online-tools/random-avatar/300';
+        if ($user) {
+            $user->avatar = 'https://testingbot.com/free-online-tools/random-avatar/300';
+            $user->role = $user->getRoleNames()->join(', ');
+            $user->access = $user->getAllPermissions()->pluck('name');
         }
+        // dd($user);
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
                 'user' => $user,
             ],
-            'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'sidebarOpen' => !$request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }
 }
