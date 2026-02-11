@@ -96,6 +96,37 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                         <div className="col-xl-8" id="bsSpyContent">
                             <div className="mb-5 pb-3">
                                 <div className="card">
+                                    <div className="card-header">
+                                        <div className="float-end">
+                                            <div className="form-group d-flex justify-content-between align-items-center">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    checked={Object.values(data.permissions).flatMap(Object.values).every(Boolean)}
+                                                    onChange={(e) => {
+                                                        const checked = e.target.checked;
+                                                        setData((prev) => ({
+                                                            ...prev,
+                                                            permissions: Object.keys(prev.permissions).reduce(
+                                                                (acc, group) => {
+                                                                    acc[group] = Object.keys(prev.permissions[group]).reduce(
+                                                                        (inner, key) => {
+                                                                            inner[key] = checked;
+                                                                            return inner;
+                                                                        },
+                                                                        {} as Record<string, boolean>,
+                                                                    );
+                                                                    return acc;
+                                                                },
+                                                                {} as Record<string, Record<string, boolean>>,
+                                                            ),
+                                                        }));
+                                                    }}
+                                                />
+                                                <label className="ms-2">Select All</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="card-body">
                                         <div className="form-group">
                                             <TextInput
@@ -119,6 +150,33 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                     <p>
                                         Role Manage to {Object.keys(data.permissions[m]).join(', ')} in {m}
                                     </p>
+
+                                    {/* Checkbox untuk select all di bagian ini */}
+                                    <div className="form-check mb-2">
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            checked={Object.values(data.permissions[m]).every(Boolean)} // true kalau semua child checked
+                                            onChange={(e) => {
+                                                const checked = e.target.checked;
+                                                setData((prev) => ({
+                                                    ...prev,
+                                                    permissions: {
+                                                        ...prev.permissions,
+                                                        [m]: Object.keys(prev.permissions[m]).reduce(
+                                                            (acc, key) => {
+                                                                acc[key] = checked;
+                                                                return acc;
+                                                            },
+                                                            {} as Record<string, boolean>,
+                                                        ),
+                                                    },
+                                                }));
+                                            }}
+                                        />
+                                        <label className="form-check-label">Check all {capitalizeFirst(m)}</label>
+                                    </div>
+
                                     <div className={cn('card', errors.permissions && 'border-red border-2')}>
                                         <div className="list-group list-group-flush fw-bold">
                                             {Object.keys(data.permissions[m]).map((x, id) => (
@@ -137,7 +195,7 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                                                 x === 'read' &&
                                                                 (data.permissions.users.create || data.permissions.users.update)
                                                             }
-                                                            checked={data.permissions[m][x]} // nilai boolean dari state
+                                                            checked={data.permissions[m][x]}
                                                             onChange={() =>
                                                                 setData((prev) => {
                                                                     const updatedPermissions = {
@@ -148,7 +206,6 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                                                         },
                                                                     };
 
-                                                                    // aturan otomatis: jika users.create atau users.update true → roles.read true
                                                                     if (
                                                                         m === 'users' &&
                                                                         (updatedPermissions.users.create || updatedPermissions.users.update)
@@ -174,6 +231,7 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                     {errors.permissions && <span className="text-red">{errors.permissions}</span>}
                                 </div>
                             ))}
+
                             <div className="mb-5 pb-3" id="submit">
                                 <div className="card">
                                     <div className="card-body">

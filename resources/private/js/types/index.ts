@@ -1,5 +1,6 @@
 export type * from './ui';
 export type * from './navigation';
+export * from './event';
 
 import type { Auth } from './auth';
 

@@ -12,6 +12,7 @@ import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack
 import { router } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 import { cn } from '@@/lib/util';
+import Swal from 'sweetalert2';
 
 type Permission = {
     id: number;
@@ -67,28 +68,43 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
             enableSorting: true,
             cell: (info) => dayjs(info.getValue() as Role['created_at']).format('DD-MMM-YYYY HH:mm'),
         },
-        { accessorKey: 'created_by', header: 'Created By', cell: () => 'John Doe', enableSorting: false },
+        { accessorKey: 'created_by_name', header: 'Created By', enableSorting: false },
         {
             accessorKey: 'updated_at',
             header: 'Last Updated',
             enableSorting: true,
             cell: (info) => dayjs(info.getValue() as Role['updated_at']).fromNow(),
         },
-        { accessorKey: 'created_by', header: 'Last Updated By', cell: () => 'Kusnuadi.spd', enableSorting: false },
+        { accessorKey: 'updated_by_name', header: 'Last Updated By', enableSorting: false },
         {
-            id: 'actions', // gunakan id, bukan accessorKey kosong
+            id: 'actions',
             header: 'Actions',
             enableSorting: false,
 
             cell: ({ row }) => {
-                const role = row.original; // akses data row
+                const role = row.original;
                 return (
                     <div className="d-flex justify-content-center gap-2">
                         <a className="btn btn-sm btn-warning" href={route('roles.edit', role.id)}>
                             <i className="fa fa-edit"></i> Edit
                         </a>
-                        <button className="btn btn-sm btn-danger" onClick={() => console.log('Delete', role.id)}>
-                            {' '}
+                        <button
+                            className="btn btn-sm btn-danger"
+                            onClick={() => {
+                                Swal.fire({
+                                    title: 'Konfirmasi',
+                                    text: `Yakin ingin menghapus role "${role.name}"?`,
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Ya, hapus!',
+                                    cancelButtonText: 'Batal',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        router.delete(route('roles.destroy', role.id));
+                                    }
+                                });
+                            }}
+                        >
                             <i className="fa fa-trash"></i> Delete
                         </button>
                     </div>
