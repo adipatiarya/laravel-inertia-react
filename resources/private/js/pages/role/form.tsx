@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppLayout from '@@/layouts/app-layout';
 import { AppContent } from '@@/components/app-content';
 import { capitalizeFirst, cn } from '@@/lib/util';
@@ -11,6 +11,7 @@ import Breadcrumb from '@@/components/ui/breadcrumb';
 import { useForm } from '@inertiajs/react';
 import { TextInput } from '@@/components/ui/TextInput';
 import { route } from 'ziggy-js';
+import { Auth } from '@@/types/auth';
 
 type ModulePermission = {
     [key: string]: {
@@ -26,7 +27,11 @@ type RoleProps = {
 const RoleForm: React.FC<RoleProps> = (props) => {
     const pageTitle = 'Role & Permission';
     const [active, setActive] = useState('');
+    const disabled = props.name.toLowerCase() == 'superadmin';
+
     const { data, setData, post, put, processing, errors } = useForm(props);
+    const isEdited = JSON.stringify(props.permissions) != JSON.stringify(data.permissions) || props.name !== data.name;
+
     function submit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         if (props.id) {
@@ -41,11 +46,8 @@ const RoleForm: React.FC<RoleProps> = (props) => {
             <AppContent>
                 <form onSubmit={submit}>
                     <Breadcrumb data={[{ title: pageTitle, href: index.get().url }, { title: 'Create New' }]} />
-                    <h1 className="page-header">Create New Role</h1>
+                    <h1 className="page-header">{!props.id ? 'Create New Role' : 'Detail Role ' + props.name} </h1>
                     <hr className="mb-4"></hr>
-                    <div className="row">
-                        <div className="col-xl-8"></div>
-                    </div>
 
                     <div className="row">
                         <div style={{ width: '230px' }}>
@@ -102,6 +104,7 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                                 <input
                                                     className="form-check-input"
                                                     type="checkbox"
+                                                    disabled={disabled}
                                                     checked={Object.values(data.permissions).flatMap(Object.values).every(Boolean)}
                                                     onChange={(e) => {
                                                         const checked = e.target.checked;
@@ -135,6 +138,7 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                                 placeholder="Choose role name"
                                                 required
                                                 value={data.name}
+                                                disabled={disabled}
                                                 onChange={(val) => setData('name', val)}
                                                 error={errors.name}
                                             />
@@ -156,6 +160,7 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                         <input
                                             type="checkbox"
                                             className="form-check-input"
+                                            disabled={disabled}
                                             checked={Object.values(data.permissions[m]).every(Boolean)} // true kalau semua child checked
                                             onChange={(e) => {
                                                 const checked = e.target.checked;
@@ -191,9 +196,10 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                                             className="form-check-input"
                                                             type="checkbox"
                                                             disabled={
-                                                                m === 'roles' &&
-                                                                x === 'read' &&
-                                                                (data.permissions.users.create || data.permissions.users.update)
+                                                                (m === 'roles' &&
+                                                                    x === 'read' &&
+                                                                    (data.permissions.users.create || data.permissions.users.update)) ||
+                                                                disabled
                                                             }
                                                             checked={data.permissions[m][x]}
                                                             onChange={() =>
@@ -232,17 +238,23 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                 </div>
                             ))}
 
-                            <div className="mb-5 pb-3" id="submit">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <div className="form-group">
-                                            <button type="submit" className="btn btn-primary" disabled={processing}>
-                                                SAVE ROLE
-                                            </button>
+                            {!disabled && (
+                                <div className="mb-5 pb-3" id="submit">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="form-group">
+                                                <button
+                                                    type="submit"
+                                                    className={cn('btn', !props.id ? 'btn-primary' : 'btn-warning')}
+                                                    disabled={processing || !isEdited}
+                                                >
+                                                    {!props.id ? 'Create Role' : 'Update Role'}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </form>

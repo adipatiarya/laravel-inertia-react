@@ -1,3 +1,4 @@
+import { disable } from '@/routes/two-factor';
 import { cn } from '@@/lib/util';
 import React, { useEffect, useState } from 'react';
 
@@ -9,9 +10,10 @@ type TextInputProps = {
     error?: string;
     placeholder?: string;
     required?: boolean;
+    disabled?: boolean;
 };
 
-export const TextInput: React.FC<TextInputProps> = ({ name, label, value, onChange, error, placeholder, required }) => {
+export const TextInput: React.FC<TextInputProps> = ({ name, label, value, onChange, error, placeholder, required, disabled }) => {
     return (
         <>
             {label && <label htmlFor={name}>{label}</label>}
@@ -22,6 +24,7 @@ export const TextInput: React.FC<TextInputProps> = ({ name, label, value, onChan
                 placeholder={placeholder}
                 required={required}
                 value={value}
+                disabled={disabled}
                 onChange={(e) => {
                     onChange(e.target.value);
                 }}
