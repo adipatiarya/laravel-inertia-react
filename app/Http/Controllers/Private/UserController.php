@@ -14,29 +14,32 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $perPage = $request->input('perPage', 10);
+        $sortBy = $request->input('sortBy', 'id');
+        $sortDir = $request->input('sortDir', 'asc');
         $search = $request->input('search');
-       // $role   = $request->input('role');
 
-        $users = User::query()
-            ->select('id', 'name', 'email', /*'role'*/ 'created_at')
-            ->when($search, fn($q) => $q->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%");
-            }))
-          //  ->when($role, fn($q) => $q->where('role', $role))
-            ->orderBy('created_at', 'desc')
-            ->paginate(1)
-            ->withQueryString();
+        $query = User::with(['roles']); // relasi roles dari Spatie
 
-            return Inertia::render('user/index', [
-                'users'   => $users,
-                'filters' => [
-                    'search' => $search,
-                    //'role'   => $role,
-                ],
-            ]);
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")->orWhereHas('roles', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            });
         }
 
+        $users = $query->orderBy($sortBy, $sortDir)->paginate($perPage);
+
+        $users->getCollection()->transform(function ($user) {
+            $user->created_by_name = 'System'; // tambahkan field pembuat
+            $user->updated_by_name = 'System'; // tambahkan field pembuat
+            $user->role = $user->roles->pluck('name')->implode(', ');
+            return $user;
+        });
+
+        return Inertia::render('user/index', [
+            'data' => $users,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -81,8 +84,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+            return to_route('users.index');
+        } catch (\Exception $e) {
+            return to_route('users.index');
+            Inertia::flash('error', 'Terjadi kesalahan saat menghapus role');
+        }
     }
 }

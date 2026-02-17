@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AppLayout from '@@/layouts/app-layout';
 import { AppContent } from '@@/components/app-content';
 import { capitalizeFirst, cn } from '@@/lib/util';
@@ -11,7 +11,6 @@ import Breadcrumb from '@@/components/ui/breadcrumb';
 import { useForm } from '@inertiajs/react';
 import { TextInput } from '@@/components/ui/TextInput';
 import { route } from 'ziggy-js';
-import { Auth } from '@@/types/auth';
 
 type ModulePermission = {
     [key: string]: {
