@@ -46,7 +46,11 @@ class UserController extends Controller
     public function create()
     {
         //
-        return Inertia::render('user/form');
+        return Inertia::render('user/form', [
+            'name' => 'dd',
+            'email' => 'xx@sa.com',
+            'role' => 'Admin',
+        ]);
     }
 
     /**

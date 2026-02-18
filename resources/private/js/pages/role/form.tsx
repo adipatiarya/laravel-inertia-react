@@ -11,19 +11,9 @@ import Breadcrumb from '@@/components/ui/breadcrumb';
 import { useForm } from '@inertiajs/react';
 import { TextInput } from '@@/components/ui/TextInput';
 import { route } from 'ziggy-js';
+import { RoleDTO } from '@@/types';
 
-type ModulePermission = {
-    [key: string]: {
-        [permission: string]: boolean;
-    };
-};
-type RoleProps = {
-    id?: string;
-    name: string;
-    permissions: ModulePermission;
-};
-
-const RoleForm: React.FC<RoleProps> = (props) => {
+const RoleForm: React.FC<RoleDTO> = (props) => {
     const pageTitle = 'Role & Permission';
     const [active, setActive] = useState('');
     const disabled = props.name.toLowerCase() == 'superadmin';
@@ -131,11 +121,14 @@ const RoleForm: React.FC<RoleProps> = (props) => {
                                     </div>
                                     <div className="card-body">
                                         <div className="form-group">
+                                            <label className="form-label">
+                                                Role Name <span className="text-red-600">*</span>
+                                            </label>
                                             <TextInput
                                                 name="name"
-                                                label="Role Name"
                                                 placeholder="Choose role name"
                                                 required
+                                                type="text"
                                                 value={data.name}
                                                 disabled={disabled}
                                                 onChange={(val) => setData('name', val)}

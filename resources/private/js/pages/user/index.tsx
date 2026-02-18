@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-import { index } from '@@/routes/roles';
+import { index } from '@@/routes/users';
 import Breadcrumb from '@@/components/ui/breadcrumb';
 import { PaginatedResponse } from '@@/types';
 import { useEffect, useState } from 'react';
@@ -134,14 +134,14 @@ const Index = ({ data }: { data: PaginatedResponse<User> }) => {
     return (
         <AppLayout title={pageTitle}>
             <AppContent>
-                <Breadcrumb data={[{ title: pageTitle, href: index.get().url }, { title: 'All Role' }]} />
+                <Breadcrumb data={[{ title: 'Users', href: index.get().url }, { title: 'All Users' }]} />
                 <h1 className="page-header">{pageTitle}</h1>
                 <div className="clearfix"></div>
                 <div className={cn('panel')}>
                     <div className="panel-heading">
-                        <button className="btn btn-primary btn-sm">
-                            <i className="fa fa-plus"></i> Add User
-                        </button>
+                        <a href={route('users.create')} className="btn btn-primary btn-sm">
+                            <i className="fa fa-plus"></i> Add New User
+                        </a>
                     </div>
                     <div className="panel-body">
                         <div className="table-responsive">

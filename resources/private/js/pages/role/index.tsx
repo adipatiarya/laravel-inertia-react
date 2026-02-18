@@ -146,9 +146,11 @@ const Index = ({ data }: { data: PaginatedResponse<Role> }) => {
                 <Breadcrumb data={[{ title: pageTitle, href: index.get().url }, { title: 'All Role' }]} />
                 <h1 className="page-header">{pageTitle}</h1>
                 <div className="clearfix"></div>
-                <div className={cn('panel panel-inverse')}>
+                <div className={cn('panel')}>
                     <div className="panel-heading">
-                        <h4 className="panel-title">Data Role</h4>
+                        <a href={route('roles.create')} className="btn btn-primary btn-sm">
+                            <i className="fa fa-plus"></i> Add New Role
+                        </a>
                     </div>
                     <div className="panel-body">
                         <div className="table-responsive">

@@ -1,6 +1,6 @@
 import { disable } from '@/routes/two-factor';
 import { cn } from '@@/lib/util';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 type TextInputProps = {
     name: string;
@@ -11,20 +11,35 @@ type TextInputProps = {
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
+    className?: string;
+    size?: 'large' | 'small';
+    type: 'email' | 'text';
 };
 
-export const TextInput: React.FC<TextInputProps> = ({ name, label, value, onChange, error, placeholder, required, disabled }) => {
+export const TextInput: React.FC<TextInputProps> = ({
+    name,
+    value,
+    onChange,
+    error,
+    placeholder,
+    required,
+    disabled,
+    className,
+    size = 'large',
+    type = 'text',
+}) => {
     return (
         <>
-            {label && <label htmlFor={name}>{label}</label>}
             <input
                 id={name}
                 name={name}
-                className={cn('form-control form-control-lg', error && 'is-invalid')}
+                className={cn('form-control', size && `form-control-${size == 'large' ? 'lg' : 'sm'}`, error && 'is-invalid', className)}
                 placeholder={placeholder}
                 required={required}
                 value={value}
                 disabled={disabled}
+                type={type}
+                autoComplete="off"
                 onChange={(e) => {
                     onChange(e.target.value);
                 }}
