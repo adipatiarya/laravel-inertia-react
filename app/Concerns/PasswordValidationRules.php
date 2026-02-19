@@ -15,6 +15,10 @@ trait PasswordValidationRules
     {
         return ['required', 'string', Password::default(), 'confirmed'];
     }
+    protected function passwordUpdateRules(): array
+    {
+        return ['nullable', 'string', Password::default(), 'confirmed'];
+    }
 
     /**
      * Get the validation rules used to validate the current password.

@@ -20,7 +20,7 @@ class RoleController extends Controller
     {
         $perPage = $request->input('perPage', 10);
         $sortBy = $request->input('sortBy', 'id');
-        $sortDir = $request->input('sortDir', 'asc');
+        $sortDir = $request->input('sortDir', 'desc');
         $search = $request->input('search');
 
         $query = Role::with(['permissions', 'creator']); // tambahkan relasi creator

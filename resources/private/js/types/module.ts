@@ -15,5 +15,6 @@ export type UserDTO = {
     email: string;
     role_id: string;
     password?: string;
+    password_confirmation?: string;
     roles: Partial<RoleDTO>[];
 };
