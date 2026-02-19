@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -47,9 +48,12 @@ class UserController extends Controller
     {
         //
         return Inertia::render('user/form', [
-            'name' => 'dd',
-            'email' => 'xx@sa.com',
-            'role' => 'Admin',
+            'roles' => Role::all(['id', 'name']),
+            'data' => [
+                'name' => '',
+                'email' => '',
+                'role_id' => '-1',
+            ],
         ]);
     }
 
@@ -59,6 +63,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request->all());
     }
 
     /**
@@ -72,9 +77,17 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         //
+        return Inertia::render('user/form', [
+            'roles' => Role::all(['id', 'name']),
+            'data' => [
+                'name' => $user->name,
+                'email' => $user->email,
+                'role_id' => $user->roles->pluck('id')[0] ?? '',
+            ],
+        ]);
     }
 
     /**

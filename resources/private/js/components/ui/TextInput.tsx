@@ -13,7 +13,7 @@ type TextInputProps = {
     disabled?: boolean;
     className?: string;
     size?: 'large' | 'small';
-    type: 'email' | 'text';
+    type: 'email' | 'text' | 'password';
 };
 
 export const TextInput: React.FC<TextInputProps> = ({

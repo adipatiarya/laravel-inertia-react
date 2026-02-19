@@ -13,18 +13,18 @@ import { TextInput } from '@@/components/ui/TextInput';
 import { route } from 'ziggy-js';
 import { RoleDTO } from '@@/types';
 
-const RoleForm: React.FC<RoleDTO> = (props) => {
+const RoleForm: React.FC<{ data: RoleDTO }> = (props) => {
     const pageTitle = 'Role & Permission';
     const [active, setActive] = useState('');
-    const disabled = props.name.toLowerCase() == 'superadmin';
+    const disabled = props.data.name.toLowerCase() == 'superadmin';
 
-    const { data, setData, post, put, processing, errors } = useForm(props);
-    const isEdited = JSON.stringify(props.permissions) != JSON.stringify(data.permissions) || props.name !== data.name;
+    const { data, setData, post, put, processing, errors } = useForm(props.data);
+    const isEdited = JSON.stringify(props.data.permissions) != JSON.stringify(data.permissions) || props.data.name !== data.name;
 
     function submit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (props.id) {
-            put(route('roles.update', props.id));
+        if (props.data.id) {
+            put(route('roles.update', props.data.id));
         } else {
             post(route('roles.store'));
         }
@@ -35,7 +35,7 @@ const RoleForm: React.FC<RoleDTO> = (props) => {
             <AppContent>
                 <form onSubmit={submit}>
                     <Breadcrumb data={[{ title: pageTitle, href: index.get().url }, { title: 'Create New' }]} />
-                    <h1 className="page-header">{!props.id ? 'Create New Role' : 'Detail Role ' + props.name} </h1>
+                    <h1 className="page-header">{!props.data.id ? 'Create New Role' : 'Detail Role ' + props.data.name} </h1>
                     <hr className="mb-4"></hr>
 
                     <div className="row">
@@ -237,10 +237,10 @@ const RoleForm: React.FC<RoleDTO> = (props) => {
                                             <div className="form-group">
                                                 <button
                                                     type="submit"
-                                                    className={cn('btn', !props.id ? 'btn-primary' : 'btn-warning')}
+                                                    className={cn('btn', !props.data.id ? 'btn-primary' : 'btn-warning')}
                                                     disabled={processing || !isEdited}
                                                 >
-                                                    {!props.id ? 'Create Role' : 'Update Role'}
+                                                    {!props.data.id ? 'Create Role' : 'Update Role'}
                                                 </button>
                                             </div>
                                         </div>

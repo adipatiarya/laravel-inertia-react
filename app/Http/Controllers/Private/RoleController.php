@@ -51,8 +51,10 @@ class RoleController extends Controller
     public function create(Request $request)
     {
         return Inertia::render('role/form', [
-            'name' => '',
-            'permissions' => AppHelper::permissionsTransformer(),
+            'data' => [
+                'name' => '',
+                'permissions' => AppHelper::permissionsTransformer(),
+            ],
         ]);
     }
 
@@ -100,9 +102,11 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         return Inertia::render('role/form', [
-            'id' => $role->id,
-            'name' => $role->name,
-            'permissions' => AppHelper::permissionsTransformer($role),
+            'data' => [
+                'id' => $role->id,
+                'name' => $role->name,
+                'permissions' => AppHelper::permissionsTransformer($role),
+            ],
         ]);
     }
 
