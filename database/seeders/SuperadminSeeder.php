@@ -18,29 +18,13 @@ class SuperadminSeeder extends Seeder
 
         // buat user admin
         $admin = User::firstOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => 'admin@admin.com'],
             [
-                'name' => 'Admin',
+                'name' => 'John Doe',
                 'password' => bcrypt('password'), // ganti dengan password aman
             ],
         );
         // assign role ke user
         $admin->assignRole($role);
-
-        $role2 = Role::findByName('Content Creator');
-        if (!$role2) {
-            throw new \Exception('Role Content Creator wajib ada sebelum seeding.');
-        }
-
-        // buat user admin
-        $admin2 = User::firstOrCreate(
-            ['email' => 'creator@example.com'],
-            [
-                'name' => 'Supardi Jaya',
-                'password' => bcrypt('password'), // ganti dengan password aman
-            ],
-        );
-        // assign role ke user
-        $admin2->assignRole($role2);
     }
 }

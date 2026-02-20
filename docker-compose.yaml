@@ -1,0 +1,73 @@
+services:
+    app:
+        image: scm:latest
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - scm
+        depends_on:
+            - database
+            - redis
+
+    nginx:
+        image: nginx:latest
+        container_name: scm-nginx
+        restart: unless-stopped
+
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx:/etc/nginx/conf.d
+        networks:
+            - scm
+        depends_on:
+            - app
+        # tidak expose port ke host
+
+    proxy:
+        image: nginx:latest
+        container_name: reverse-proxy
+        restart: unless-stopped
+        ports:
+            - '80:80' # hanya proxy yang expose ke host
+        volumes:
+            - ./docker/proxy:/etc/nginx/conf.d
+        networks:
+            - scm
+        depends_on:
+            - nginx
+
+    database:
+        image: mysql:8.0.35
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes:
+            - mysql_data:/var/lib/mysql
+        networks:
+            - scm
+    phpmyadmin:
+        image: phpmyadmin:latest
+        depends_on:
+            - database
+        networks:
+            - scm
+        environment:
+            PMA_HOST: database
+            MYSQL_ROOT_PASSWORD: password
+            UPLOAD_LIMIT: 2048M
+    redis:
+        image: redis:alpine
+        networks:
+            - scm
+
+networks:
+    scm:
+        driver: bridge
+
+volumes:
+    mysql_data:
+    redis_data:

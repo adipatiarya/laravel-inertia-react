@@ -37,22 +37,6 @@ class RolePermissionSeeder extends Seeder
         $role->syncPermissions([]);
         $role->givePermissionTo(Permission::all());
 
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-        $role2 = Role::firstOrCreate(['name' => 'Content Creator']);
-        $role2->syncPermissions([]);
-
-        $role2->givePermissionTo([
-            'create posts',
-            'read posts',
-            'update posts',
-            'delete posts',
-            'create pages',
-            'update pages',
-            'read pages',
-            'delete pages',
-        ]);
-
         \Log::info('Created success ');
     }
 }

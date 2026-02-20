@@ -1,0 +1,32 @@
+# Ignore git files
+.git
+.gitignore
+
+# Ignore Docker files
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Ignore node modules
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Ignore vendor (biar Composer install di dalam container)
+vendor
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore cache & logs
+
+
+# Ignore IDE/editor files
+*.swp
+*.swo
+*.bak
+*.tmp
+*.DS_Store
+.vscode
+.idea

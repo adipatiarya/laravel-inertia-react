@@ -76,6 +76,7 @@ class UserController extends Controller
         $role = Role::find($request->role_id);
 
         $user->assignRole($role);
+        $user->created_by = auth()->id();
 
         $user->save();
 
@@ -115,6 +116,7 @@ class UserController extends Controller
         $user->fill($request->validated());
         $role = Role::find($request->role_id);
         $user->syncRoles($role);
+        $user->updated_by = auth()->id();
         $user->save();
         return to_route('users.index');
     }
