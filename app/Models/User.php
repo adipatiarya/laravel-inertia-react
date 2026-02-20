@@ -41,6 +41,15 @@ class User extends Authenticatable
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+    public function creator()
+    {
+        return $this->belongsTo(self::class, 'created_by');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(self::class, 'updated_by');
+    }
 
     public function getPermissions()
     {

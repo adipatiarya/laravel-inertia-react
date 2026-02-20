@@ -1,6 +1,9 @@
 services:
     app:
-        image: scm:latest
+        build:
+            context: .
+            dockerfile: Dockerfile
+
         working_dir: /var/www
         volumes:
             - ./:/var/www
@@ -10,6 +13,8 @@ services:
         depends_on:
             - database
             - redis
+        environment:
+            DB_CONNECTION: mysql
 
     nginx:
         image: nginx:latest

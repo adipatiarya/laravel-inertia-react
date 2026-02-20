@@ -38,8 +38,8 @@ class UserController extends Controller
         $users = $query->orderBy($sortBy, $sortDir)->paginate($perPage);
 
         $users->getCollection()->transform(function ($user) {
-            $user->created_by_name = 'System'; // tambahkan field pembuat
-            $user->updated_by_name = 'System'; // tambahkan field pembuat
+            $user->created_by_name = $user->creator?->name ?? 'System'; // tambahkan field pembuat
+            $user->updated_by_name = $user->updater?->name ?? '-'; // tambahkan field pembuat
             $user->role = $user->roles->pluck('name')->implode(', ');
             return $user;
         });
