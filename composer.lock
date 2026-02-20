@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57c7e91b15ca4bb9b76c1d040d6c6402",
+    "content-hash": "6ae3949abf0e09d7c06e54d2d4998557",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2729,6 +2729,32 @@
                 "source": "https://github.com/MarkBaker/PHPMatrix/tree/3.0.1"
             },
             "time": "2022-12-02T22:17:43+00:00"
+        },
+        {
+            "name": "maxsol/laravel-file-manager",
+            "version": "dev-feature-media",
+            "dist": {
+                "type": "path",
+                "url": "packages/maxsol/laravel-file-manager",
+                "reference": "c28292484ace4ad1b96468640fc31b14dc83b3ad"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Maxsol\\LaravelFileManager\\LaravelFileManagerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Maxsol\\LaravelFileManager\\": "src/"
+                }
+            },
+            "description": "My custom Laravel package",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
@@ -11102,7 +11128,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "maxsol/laravel-file-manager": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
