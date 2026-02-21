@@ -26,4 +26,8 @@ class FileManagerController extends Controller
     {
         return response()->json($this->fm->content($request->input('disk'), $request->input('path')));
     }
+    public function tree(RequestValidator $request): JsonResponse
+    {
+        return response()->json(['success' => true]);
+    }
 }

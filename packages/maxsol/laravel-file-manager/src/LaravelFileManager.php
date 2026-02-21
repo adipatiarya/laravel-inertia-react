@@ -66,4 +66,14 @@ class LaravelFileManager
             ...$content,
         ];
     }
+
+    public function tree($disk, $path): array
+    {
+        return [
+            'result' => [
+                'status' => 'success',
+                'message' => null,
+            ],
+        ];
+    }
 }

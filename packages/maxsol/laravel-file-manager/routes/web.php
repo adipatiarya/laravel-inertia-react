@@ -20,10 +20,12 @@ Route::group(
     [
         'middleware' => $middleware,
         'prefix' => $config->getRoutePrefix(),
-        'namespace' => 'Maxsol\LaravelFileManager\Controllers',
     ],
     function () {
-        Route::get('initialize', [FileManagerController::class, 'initialize'])->name('fm.initialize');
-        Route::get('content', [FileManagerController::class, 'content'])->name('fm.content');
+        Route::controller(FileManagerController::class)->group(function () {
+            Route::get('initialize', 'initialize')->name('fm.initialize');
+            Route::get('content', 'content')->name('fm.content');
+            Route::get('tree', 'tree')->name('fm.tree');
+        });
     },
 );

@@ -7,6 +7,11 @@
       "Maxsol\\LaravelFileManager\\": "src/"
     }
   },
+  "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "league/flysystem": "^3.0"
+  },
   "extra": {
     "laravel": {
       "providers": [
