@@ -20,6 +20,9 @@ vendor
 .env.*
 
 # Ignore cache & logs
+storage/logs
+storage/framework/cache
+bootstrap/cache/*.php
 
 
 # Ignore IDE/editor files
